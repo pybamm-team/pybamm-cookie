@@ -61,11 +61,13 @@ Homepage = "{{ cookiecutter.url }}"
 Discussions = "{{ cookiecutter.url }}/discussions"
 Changelog = "{{ cookiecutter.url }}/releases"
 
+{%- if cookiecutter.backend == "hatch" %}
 [tool.hatch]
 version.path = "src/{{ cookiecutter.__project_slug }}/__init__.py"
 envs.default.dependencies = [
   "pybamm",
 ]
+{%- endif %}
 
 [tool.coverage]
 run.source = ["{{ cookiecutter.__project_slug }}"]
