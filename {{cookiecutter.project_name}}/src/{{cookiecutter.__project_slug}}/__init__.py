@@ -5,6 +5,6 @@ Copyright (c) {{ cookiecutter.__year }} {{ cookiecutter.full_name }}. All rights
 """
 
 
-__version__ = "0.1.0"
+__version__ = "0.0.1"
 
 __all__ = ("__version__",)

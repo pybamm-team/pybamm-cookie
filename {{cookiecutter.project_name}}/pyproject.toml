@@ -40,8 +40,8 @@ classifiers = [
 ]
 {%- if cookiecutter.backend == "hatch" %}
 dynamic = ["version"]
-dependencies = ["pybamm"]
 {%- endif %}
+dependencies = ["pybamm"]
 
 [project.optional-dependencies]
 dev = [
