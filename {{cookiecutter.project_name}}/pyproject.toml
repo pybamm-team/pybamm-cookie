@@ -47,12 +47,22 @@ dependencies = ["pybamm"]
 dev = [
   "pytest >=6",
   "pytest-cov >=3",
+  "nox",
+  "pre-commit",
 ]
 docs = [
   "sphinx",
-  "myst_parser",
-  "sphinx_copybutton",
   "pydata_sphinx_theme",
+  "sphinx_design",
+  "sphinx-copybutton",
+  "myst-parser",
+  "sphinx-inline-tabs",
+  "sphinxcontrib-bibtex",
+  "sphinx-autobuild",
+  "sphinx-last-updated-by-git",
+  "nbsphinx",
+  "ipython",
+  "sphinx-gallery",
 ]
 
 [project.urls]
