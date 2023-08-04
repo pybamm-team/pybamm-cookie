@@ -7,7 +7,7 @@ nox.options.reuse_existing_virtualenvs = True
 def build_docs(session):
     """Build the documentation and load it in a browser tab, rebuilding on changes."""
     envbindir = session.bin
-    session.install("-e", ".[all,docs]")
+    session.install("-e", ".[docs]")
     with session.chdir("docs/"):
         session.run(
             "sphinx-autobuild",
