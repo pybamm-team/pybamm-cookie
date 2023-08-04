@@ -14,7 +14,6 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_inline_tabs",
     "pydata_sphinx_theme",
-    "hoverxref.extension",
     "nbsphinx",
 ]
 
