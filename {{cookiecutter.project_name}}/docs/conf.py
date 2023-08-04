@@ -107,6 +107,20 @@ extensions = [
     "IPython.sphinxext.ipython_console_highlighting",
 ]
 
+# ---- Options for EPUB output --------------------------------------------------------
+
+# Bibliographic Dublin Core information
+epub_title = project
+
+# The unique identifier of the text. This can be a ISBN number or the project homepage
+# epub_identifier = ''
+
+# A unique identification for the text
+# epub_uid = ''
+
+# A list of files that should not be packed into the EPUB file
+epub_exclude_files = ["search.html"]
+
 # ---- HTML theme configuration -------------------------------------------------------
 
 # Theme options are theme-specific and customize the look and feel of a theme further.
