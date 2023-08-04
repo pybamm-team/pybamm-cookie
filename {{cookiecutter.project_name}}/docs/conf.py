@@ -102,7 +102,6 @@ extensions = [
     "sphinxcontrib.bibtex",
     "sphinx_last_updated_by_git",
     "pydata_sphinx_theme",
-    "hoverxref.extension",
     "nbsphinx",
     "IPython.sphinxext.ipython_console_highlighting",
 ]
