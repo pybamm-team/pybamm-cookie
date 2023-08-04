@@ -1,7 +1,7 @@
 import importlib.metadata
 
 project = "pybamm-cookiecutter"
-copyright = "2023, Agriya Khetarpal"
+copyright = "2018-2023, The PyBaMM Team"
 author = "Agriya Khetarpal"
 version = release = importlib.metadata.version("pybamm_cookiecutter")
 
@@ -14,7 +14,6 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_inline_tabs",
     "pydata_sphinx_theme",
-    "hoverxref.extension",
     "nbsphinx",
 ]
 
