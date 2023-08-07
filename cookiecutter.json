@@ -17,6 +17,10 @@
     "backend": [
         "hatch"
     ],
+    "parameter_set": [
+        "True",
+        "False"
+    ],
     "__year": "{% now 'utc', '%Y' %}",
     "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
     "__type": "{{ 'pure' }}",
@@ -38,6 +42,11 @@
         "backend": {
             "__prompt__": "Choose a build backend",
             "hatch": "Hatchling (recommended for pure Python projects)"
+        },
+        "parameter_set": {
+            "__prompt__": "Do you intend to create a third-party parameter set?",
+            "True": "Yes",
+            "False": "No"
         }
     }
 }
