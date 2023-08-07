@@ -71,6 +71,11 @@ Homepage = "{{ cookiecutter.url }}"
 Discussions = "{{ cookiecutter.url }}/discussions"
 Changelog = "{{ cookiecutter.url }}/releases"
 
+{%- if cookiecutter.parameter_set == "True" %}
+[project.entry-points.pybamm_parameter_sets]
+my_parameters = "src.{{ cookiecutter.__project_slug }}.my_parameters:get_parameter_values"
+{%- endif %}
+
 {%- if cookiecutter.backend == "hatch" %}
 [tool.hatch]
 version.path = "src/{{ cookiecutter.__project_slug }}/__init__.py"
