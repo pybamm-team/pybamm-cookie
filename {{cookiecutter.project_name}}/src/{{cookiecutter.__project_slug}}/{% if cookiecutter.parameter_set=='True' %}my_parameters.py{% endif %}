@@ -1,0 +1,48 @@
+"""
+Copyright (c) {{ cookiecutter.__year }} {{ cookiecutter.full_name }}. All rights reserved.
+
+{{ cookiecutter.project_name }}: {{ cookiecutter.project_short_description }}
+"""
+
+import pybamm
+import numpy as np
+
+# Extra dependencies may be imported here.
+
+
+# PyBaMM ships with many parameter sets for a variety of chemistries, such as
+# lead-acid and lithium-ion parameter sets. For more information plus details
+# on how to create your own parameter sets, refer to the PyBaMM documentation
+# on parameter sets at
+# https://docs.pybamm.org/en/latest/source/api/parameters/parameter_sets.html
+
+# The function below is listed for you as an entry point in pyproject.toml so
+# that it can be used as a parameter set for experiments using PyBaMM. You may
+# add more functions to describe calculations and other functionality.
+
+# Note: the function name must be "get_parameter_values" for PyBaMM to recognise
+# it as a parameter set.
+
+def get_parameter_values():
+    """
+    Example docstring for a third-party parameter set titled `my_parameters`.
+
+    References
+    ----------
+
+    Add references to the relevant papers here in this format, to be parsed by
+    sphinxcontrib.bibtex in the documentation through a CITATIONS.bib file. You
+    may refer to the documentation for this extension at
+    https://sphinxcontrib-bibtex.readthedocs.io/en/latest/
+
+    :footcite:`van1995python`
+
+    """
+
+    # Return the relevant parameter values such as those for positive and negative
+    # electrodes, electrolytes, experiments, and citations here.
+    return {
+        "chemistry": "lithium_ion",
+        "citation": "@book{van1995python, title={Python reference manual}}",
+        # ...
+    }
