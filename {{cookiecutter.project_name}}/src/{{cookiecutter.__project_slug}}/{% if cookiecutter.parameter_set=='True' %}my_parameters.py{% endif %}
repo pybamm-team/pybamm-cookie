@@ -89,3 +89,8 @@ def get_parameter_values():
         "citations": ["van1995python", "OKane2022"],
         # ...and so on
     }
+
+# You may see any of the parameter sets that ship with PyBaMM for examples of how
+# to define parameter values in Python files. For example, the parameter set for
+# an Enertech cell (Ai2020) is defined in this file:
+# https://github.com/pybamm-team/PyBaMM/blob/develop/pybamm/input/parameters/lithium_ion/Ai2020.py. # noqa: E501
