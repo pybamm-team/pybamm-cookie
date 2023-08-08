@@ -16,12 +16,49 @@ import numpy as np
 # on parameter sets at
 # https://docs.pybamm.org/en/latest/source/api/parameters/parameter_sets.html
 
+# Note: the file must contain a function "get_parameter_values" that returns a
+# dictionary for PyBaMM to recognise it as a parameter set. A sample function
+# is provided for you at the end of this file.
+
+# A sample function for operations on scalar parameters is provided for you
+# below, defined using pybamm.Parameter objects. It returns the rate of decay
+# of the SEI layer as a function of the total SEI thickness.
+
+def SEI_limited_dead_lithium_OKane2022(L_sei):
+    """
+    Decay rate for dead lithium formation [s-1].
+
+    References
+    ----------
+    :footcite:t:`OKane2022`
+
+    Parameters
+    ----------
+    L_sei : :class:`pybamm.Symbol`
+        Total SEI thickness [m]
+
+    Returns
+    -------
+    :class:`pybamm.Symbol`
+        Dead lithium decay rate [s-1]
+    """
+
+    gamma_0 = pybamm.Parameter("Dead lithium decay constant [s-1]")
+    L_inner_0 = pybamm.Parameter("Initial inner SEI thickness [m]")
+    L_outer_0 = pybamm.Parameter("Initial outer SEI thickness [m]")
+    L_sei_0 = L_inner_0 + L_outer_0
+
+    gamma = gamma_0 * L_sei_0 / L_sei
+
+    return gamma
+
+
 # The function below is listed for you as an entry point in pyproject.toml so
 # that it can be used as a parameter set for experiments using PyBaMM. You may
 # add more functions to describe calculations and other functionality.
 
-# Note: the function name must be "get_parameter_values" for PyBaMM to recognise
-# it as a parameter set.
+# This function must return the parameter values from any defined functions as
+# well as the values for any scalar parameters.
 
 def get_parameter_values():
     """
@@ -41,7 +78,14 @@ def get_parameter_values():
     # Return the relevant parameter values such as those for positive and negative
     # electrodes, electrolytes, experiments, and citations here.
     return {
+        # Chemistry
         "chemistry": "lithium_ion",
-        "citation": "@book{van1995python, title={Python reference manual}}",
-        # ...
+        # SEI parameters
+        "Initial inner SEI thickness [m]": 0.0,
+        "Initial outer SEI thickness [m]": 5e-09,
+        # Lithium plating
+        "Dead lithium decay rate [s-1]": SEI_limited_dead_lithium_OKane2022,
+        # List of citation keys for the papers that define the parameter values
+        "citations": ["van1995python", "OKane2022"],
+        # ...and so on
     }
