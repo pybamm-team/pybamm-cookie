@@ -29,13 +29,12 @@ def get_parameter_values():
 
     References
     ----------
-
     Add references to the relevant papers here in this format, to be parsed by
     sphinxcontrib.bibtex in the documentation through a CITATIONS.bib file. You
     may refer to the documentation for this extension at
     https://sphinxcontrib-bibtex.readthedocs.io/en/latest/
 
-    :footcite:`van1995python`
+    :footcite:t:`van1995python`
 
     """
 
