@@ -121,4 +121,4 @@ Thumbs.db
 *.swp
 
 # hatch-vcs
-src/pybamm_cookiecutter/_version.py
+*/_version.py
