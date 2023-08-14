@@ -3,8 +3,7 @@ Copyright (c) {{ cookiecutter.__year }} {{ cookiecutter.full_name }}. All rights
 
 {{ cookiecutter.project_name }}: {{ cookiecutter.project_short_description }}
 """
+from ._version import version as __version__
 
-
-__version__ = "0.0.1"
 
 __all__ = ("__version__",)

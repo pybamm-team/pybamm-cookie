@@ -37,6 +37,7 @@ repos:
     rev: v0.0.281
     hooks:
       - id: ruff
+        files: "^(src/pybamm_cookiecutter|tests$)"
         args: ["--fix", "--show-fixes"]
 
   # Documentation files
@@ -61,3 +62,11 @@ repos:
     hooks:
       - id: nbqa-ruff
         additional_dependencies: [ruff==0.0.281]
+
+  # mypy
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.4.1
+    hooks:
+      - id: mypy
+        files: "^(src/pybamm_cookiecutter|tests$)"

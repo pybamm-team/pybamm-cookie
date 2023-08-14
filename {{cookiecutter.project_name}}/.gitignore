@@ -119,3 +119,6 @@ Thumbs.db
 # Common editor files
 *~
 *.swp
+
+# hatch-vcs
+src/pybamm_cookiecutter/_version.py
