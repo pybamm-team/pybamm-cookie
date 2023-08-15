@@ -126,3 +126,6 @@ cython_debug/
 
 # Code editor files and folders
 .vscode/
+
+# hatch-vcs
+src/pybamm_cookiecutter/_version.py

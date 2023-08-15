@@ -4,7 +4,7 @@ import nox
 nox.options.reuse_existing_virtualenvs = True
 
 @nox.session(name="docs")
-def build_docs(session):
+def build_docs(session: nox.Session) -> None:
     """Build the documentation and load it in a browser tab, rebuilding on changes."""
     envbindir = session.bin
     session.install("-e", ".[docs]")

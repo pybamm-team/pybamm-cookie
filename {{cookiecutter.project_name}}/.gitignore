@@ -119,3 +119,6 @@ Thumbs.db
 # Common editor files
 *~
 *.swp
+
+# hatch-vcs
+*/_version.py
