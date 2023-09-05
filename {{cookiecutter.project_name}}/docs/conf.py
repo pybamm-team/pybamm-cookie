@@ -14,10 +14,9 @@
 # https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/index.html
 
 
-import os
-import sys
 import importlib.metadata
-
+import sys
+from pathlib import Path
 
 # ---- Project information ------------------------------------------------------------
 
@@ -29,10 +28,10 @@ version = release = importlib.metadata.version("{{ cookiecutter.__project_slug }
 # ---- Path configuration -------------------------------------------------------------
 
 # Path for repository root
-sys.path.insert(0, os.path.abspath("../"))
+sys.path.insert(0, Path("../").resolve())
 
 # Path for local Sphinx extensions
-sys.path.append(os.path.abspath("./sphinxext/"))
+sys.path.append(Path("./sphinxext/").resolve())
 
 # ---- General configuration ----------------------------------------------------------
 
@@ -55,7 +54,7 @@ exclude_patterns = [
 ]
 
 html_theme = "pydata_sphinx_theme"
-html_title = "%s v%s Manual" % (project, version)
+html_title = f"{project} v{version} Manual"
 html_last_updated_fmt = "%Y-%m-%d"
 html_static_path = ["_static"]
 html_file_suffix = ".html"
