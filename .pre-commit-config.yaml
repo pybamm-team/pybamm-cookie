@@ -15,6 +15,7 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+        files: "^(src/pybamm_cookiecutter|tests$)"
       - id: check-added-large-files
       - id: mixed-line-ending
 

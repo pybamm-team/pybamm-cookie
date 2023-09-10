@@ -27,6 +27,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",  # PyBaMM supports >=3.8,<3.12
   "Topic :: Scientific/Engineering",
+  "Typing :: Typed",
 ]
 dynamic = ["version"]
 dependencies = ["pybamm"]

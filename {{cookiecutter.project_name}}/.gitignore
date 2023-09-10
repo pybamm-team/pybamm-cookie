@@ -122,3 +122,8 @@ Thumbs.db
 
 # hatch-vcs
 */_version.py
+
+# mypy
+.mypy_cache
+.dmypy.json
+dmypy.json

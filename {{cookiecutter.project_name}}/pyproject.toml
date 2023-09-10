@@ -40,6 +40,9 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",  # PyBaMM supports >=3.8,<3.12
   "Topic :: Scientific/Engineering",
+{%- if cookiecutter.mypy %}
+  "Typing :: Typed",
+{%- endif %}
 ]
 {%- if cookiecutter.backend == "hatch" %}
 dynamic = ["version"]
@@ -73,7 +76,7 @@ Homepage = "{{ cookiecutter.url }}"
 "Bug Tracker" = "{{ cookiecutter.url }}/issues"
 Discussions = "{{ cookiecutter.url }}/discussions"
 Changelog = "{{ cookiecutter.url }}/releases"
-
+{# keep this line here for newline #}
 {%- if cookiecutter.backend == "hatch" %}
 [tool.hatch]
 version.source = "vcs"
@@ -81,6 +84,21 @@ build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.p
 envs.default.dependencies = [
   "pybamm",
 ]
+{%- endif %}
+{# keep this line here for newline #}
+{%- if cookiecutter.mypy %}
+[tool.mypy]
+python_version = "3.8"
+strict = true
+warn_return_any = false
+show_error_codes = true
+enable_error_code = [
+  "ignore-without-code",
+  "truthy-bool",
+  "redundant-expr",
+]
+disallow_untyped_defs = false
+disallow_untyped_calls = false
 {%- endif %}
 
 [tool.coverage]
@@ -120,5 +138,6 @@ unfixable = [
   "T20",  # Removes print statements
   "F841", # Removes unused variables
 ]
+line-length = 100
 exclude = []
 flake8-unused-arguments.ignore-variadic-names = true
