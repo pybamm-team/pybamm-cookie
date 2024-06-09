@@ -24,9 +24,7 @@ def test_bake_custom_project(cookies: Cookies, custom_template):
     Testing if the projects exists in the tempdir
     """
     result = cookies.bake(template=str(custom_template))
-
-    assert result.exit_code == 0
-    assert result.exception is None
-
+    assert result.exit_code == 0, "Exited with code 0"
+    assert result.exception is None, result.exception
     assert result.project_path.name == "pybamm_cookie"
-    assert result.project_path.is_dir()
+    assert result.project_path.is_dir(), "Project directory not found"
