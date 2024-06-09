@@ -1,5 +1,6 @@
 import pybamm_cookiecutter as m
 import pytest
+from pytest_cookies.plugin import Cookies
 
 def test_version() -> None:
     assert m.__version__
@@ -18,7 +19,7 @@ def custom_template(tmpdir):
     return template
 
 
-def test_bake_custom_project(cookies, custom_template):
+def test_bake_custom_project(cookies: Cookies, custom_template):
     """
     Testing if the projects exists in the tempdir
     """
