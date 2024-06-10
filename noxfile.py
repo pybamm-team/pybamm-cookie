@@ -24,7 +24,5 @@ def build_docs(session: nox.Session) -> None:
 def run_template_generation(session):
     """Run the tests tests for testing template generation"""
     session.install("setuptools", silent=False)
-    session.install("pytest", silent=False)
-    session.install("pytest-cookies", silent=False)
-    session.install("-e", ".", silent=False)
+    session.install("-e", ".[dev]", silent=False)
     session.run("pytest", "tests")
