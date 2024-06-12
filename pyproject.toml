@@ -36,7 +36,7 @@ dependencies = ["pybamm", "cookiecutter"]
 dev = [
   "pytest >=6",
   "pytest-cov >=3",
-  "nox",
+  "nox[uv]",
   "pre-commit",
   "pytest-cookies",
 ]
