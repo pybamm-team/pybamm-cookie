@@ -5,6 +5,10 @@ pybamm-cookiecutter: A template for creating battery modeling projects based on 
 """
 from __future__ import annotations
 
+import pybamm
+
 from ._version import version as __version__
 
-__all__ : tuple[str] = ("__version__",)
+__all__ : list[str] = [
+    "__version__",
+]
