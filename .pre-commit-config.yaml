@@ -71,3 +71,6 @@ repos:
     hooks:
       - id: mypy
         files: "^(src/pybamm_cookiecutter|tests$)"
+
+exclude:
+  CODE-OF-CONDUCT.md
