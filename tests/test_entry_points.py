@@ -1,16 +1,16 @@
 import pytest
 import pybamm_cookiecutter
-import glob
 import importlib.util
 import sys
+from pathlib import Path
 
 def test_entry_points():
     """Testing if the entry points are loading right"""
 
     entry_points = list(pybamm_cookiecutter.parameter_sets)
-    parameter_sets = glob.glob("src/pybamm_cookiecutter/parameters/input/*.py")
+    parameter_sets = Path("src/pybamm_cookiecutter/parameters/input/").glob("*.py")
     # Making a list Parameter sets in the parameters/input directory
-    parameter_sets = [x.split('/')[-1].split('.py')[0] for x in parameter_sets]
+    parameter_sets = [str(x).split('/')[-1].split('.py')[0] for x in parameter_sets]
 
     assert parameter_sets == entry_points, "Entry points missing either in pyproject.toml or in the input directory"
 

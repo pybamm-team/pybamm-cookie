@@ -37,4 +37,4 @@ def set_dev(session):
     session.install("virtualenv")
     session.run("virtualenv", os.fsdecode(VENV_DIR), silent=True)
     python = os.fsdecode(VENV_DIR.joinpath("bin/python"))
-    session.run(python, "-m", "pip", "install", "-e", ".[dev]")
+    session.run(python, "-m", "uv", "pip", "install", "-e", ".[dev]")

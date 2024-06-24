@@ -1,12 +1,41 @@
-from __future__ import annotations
-
 import importlib.metadata
 import sys
 import textwrap
-import warnings
 from collections.abc import Mapping
 from typing import Callable
 
+
+"""
+This code is adopted from the PyBaMM project under the BSD 3-Clause
+
+Copyright (c) 2018-2024, the PyBaMM team.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+* Neither the name of the copyright holder nor the names of its
+  contributors may be used to endorse or promote products derived from
+  this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+"""
 
 class ParameterSets(Mapping):
     """
@@ -85,17 +114,7 @@ class ParameterSets(Mapping):
         try:
             return super().__getattribute__(name)
         except AttributeError as error:
-            # For backwards compatibility, parameter sets that used to be defined in
-            # this file now return the name as a string, which will load the same
-            # parameter set as before when passed to `ParameterValues`
-            if name in self:
-                msg = (
-                    f"Parameter sets should be called directly by their name ({name}), "
-                    f"instead of via pybamm_cookiecutter.parameter_sets (pybamm_cookiecutter.parameter_sets.{name})."
-                )
-                warnings.warn(msg, DeprecationWarning, stacklevel=2)
-                return name
-            raise error
+              raise error
 
 #: Singleton Instance of :class:ParameterSets """
 parameter_sets = ParameterSets()
