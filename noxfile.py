@@ -1,6 +1,7 @@
 import nox
 
 # Options to modify nox behaviour
+nox.options.default_venv_backend = "uv|virtualenv"
 nox.options.reuse_existing_virtualenvs = True
 
 @nox.session(name="docs")
@@ -18,3 +19,10 @@ def build_docs(session: nox.Session) -> None:
             ".",
             f"{envbindir}/../tmp/html",
         )
+
+@nox.session(name="test-generation")
+def run_template_generation(session):
+    """Run the tests for testing template generation"""
+    session.install("setuptools", silent=False)
+    session.install("-e", ".[dev]", silent=False)
+    session.run("pytest", "tests")

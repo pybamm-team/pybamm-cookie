@@ -1,0 +1,54 @@
+name: Test template generation
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+    - main
+jobs:
+  style:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Check style
+        run: |
+          python -m pip install pre-commit
+          pre-commit run -a
+
+  template_test:
+    needs: style
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-13, macos-14, windows-latest]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+    name:
+      Template Tests (${{ matrix.os }} / Python ${{ matrix.python-version }})
+    steps:
+      - name: Checkout pybamm-cookiecutter
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        id: setup-python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Set up uv
+        uses: yezz123/setup-uv@v4
+        with:
+          uv-venv: ".venv"
+
+      - name: Install nox
+        run: uv pip install nox[uv]
+
+      - name: Test Template Generation
+        run: |
+          nox -s test-generation
