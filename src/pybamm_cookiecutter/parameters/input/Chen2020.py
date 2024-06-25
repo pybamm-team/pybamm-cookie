@@ -1,7 +1,3 @@
-from __future__ import annotations
-
-import numpy as np
-import pybamm
 """
 This code is adopted from the PyBaMM project under the BSD 3-Clause
 
@@ -32,9 +28,13 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 """
 
+
+from __future__ import annotations
+
+import numpy as np
+import pybamm
 def graphite_LGM50_ocp_Chen2020(sto):
     """
     LG M50 Graphite open-circuit potential as a function of stochiometry, fit taken
