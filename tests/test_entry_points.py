@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 def test_entry_points():
-    """Testing if the entry points are loading right"""
+    """Test if the entry points are loaded correctly."""
 
     entry_points = list(pybamm_cookiecutter.parameter_sets)
     parameter_sets = Path("src/pybamm_cookiecutter/parameters/input/").glob("*.py")
