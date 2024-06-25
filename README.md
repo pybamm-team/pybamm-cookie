@@ -22,5 +22,59 @@
 [pypi-version]:             https://img.shields.io/pypi/v/pybamm-cookiecutter
 [rtd-badge]:                https://readthedocs.org/projects/pybamm-cookiecutter/badge/?version=latest
 [rtd-link]:                 https://pybamm-cookiecutter.readthedocs.io/en/latest/?badge=latest -->
+[![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
 
 This repository contains a `cookiecutter` template for battery modeling projects using PyBaMM, released under the [BSD-3-Clause license](LICENSE). Currently under active development.
+
+## 📄 Using pybamm-cookiecutter
+
+### Generating projects with pybamm-cookiecutter
+
+This template is not on PyPi so it cannot be installed through pip until the first release. Meanwhile it can be used by cloning this repository and using cookiecutter to generate a project with this template.
+
+To use pybamm-cookiecutter template, first clone this repository on your local machine.
+```bash
+git clone https://github.com/pybamm-team/pybamm-cookiecutter.git
+```
+Create a temporary virtual environment inside the reposiory and activate it.
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+Install cookiecutter and generate the project using the pybamm-cookiecutter template by moving outside the parent pybamm-cookiecutter directory.
+```bash
+pip install cookiecutter
+cookiecutter pybamm-cookiecutter/
+```
+Cookiecutter will prompt you with various configurations and you may choose the ones that suit your use case.
+
+
+### Installing the pybamm_cookiecutter project
+
+This is our version of the project generated using the cookiecutter template. There are two ways to install this project, either through nox or pip.
+To install navigate to the root directory of this repository and execute either of these commands.
+
+`nox -s dev`
+or
+`pip install -e .[dev]`
+
+To check if the project was successfully installed import the project inside python.
+
+```python
+import pybamm_cookiecutter
+
+pybamm_cookiecutter._version.version
+```
+
+## 🛠️ Contributing to PyBaMM
+
+If you'd like to help us develop PyBaMM by adding new methods, writing documentation, or fixing embarrassing bugs, please have a look at these [guidelines](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/CONTRIBUTING.md) first.
+
+## 📫 Get in touch
+
+For any questions, comments, suggestions or bug reports, please see the
+[contact page](https://www.pybamm.org/community).
+
+## 📃 License
+
+pybamm-cookiecutter is fully open source. For more information about its license, see [LICENSE](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE.txt).
