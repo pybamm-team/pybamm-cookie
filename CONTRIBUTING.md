@@ -130,7 +130,7 @@ Tests are run for different operating systems, and for all Python versions offic
 
 More details can be obtained by clicking on a specific run.
 
-Configuration files for various GitHub actions workflow can be found in `.github/worklfows`.
+Configuration files for various GitHub actions workflow can be found in `.github/workflows`.
 
 ### GitHub
 
