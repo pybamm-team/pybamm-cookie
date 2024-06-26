@@ -38,7 +38,7 @@ We use [Git](https://en.wikipedia.org/wiki/Git) and [GitHub](https://en.wikipedi
 2. Create a [branch](https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/) of this repo (ideally on your own [fork](https://help.github.com/articles/fork-a-repo/)), where all changes will be made.
 3. Download the source code onto your local system, by [cloning](https://help.github.com/articles/cloning-a-repository/) the repository (or your fork of the repository).
 4. Use `nox -s dev` or `pip install -e .[dev]` to install `pybamm-cookiecutter` in editable/development mode.
-5. [Test](#testing) if your installation worked, using the test script: `nox -s test-generation` or `pytest tests/`.
+5. [Test](#testing) if your installation worked, using the test script: `nox -s test-generation` or `pytest`.
 
 You now have everything you need to start making changes!
 
