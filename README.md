@@ -26,11 +26,11 @@
 
 This repository contains a `cookiecutter` template for battery modeling projects using PyBaMM, released under the [BSD-3-Clause license](LICENSE). Currently under active development.
 
-## 📄 Using pybamm-cookiecutter
+## 📄 Using `pybamm-cookiecutter`
 
-### Generating projects with pybamm-cookiecutter
+### Generating projects with `pybamm-cookiecutter`
 
-This template is not on PyPi so it cannot be installed through pip until the first release. Meanwhile it can be used by cloning this repository and using cookiecutter to generate a project with this template.
+This template is not on PyPI yet, so it cannot be installed through `pip` until the first release. Meanwhile, it can be used by cloning this repository and using `cookiecutter` to generate a project with this template.
 
 To use pybamm-cookiecutter template, first clone this repository on your local machine.
 ```bash
@@ -46,19 +46,20 @@ Install cookiecutter and generate the project using the pybamm-cookiecutter temp
 pip install cookiecutter
 cookiecutter pybamm-cookiecutter/
 ```
+
 Cookiecutter will prompt you with various configurations and you may choose the ones that suit your use case.
 
 
-### Installing the pybamm_cookiecutter project
+### Installing the `pybamm-cookiecutter` project
 
-This is our version of the project generated using the cookiecutter template. There are two ways to install this project, either through nox or pip.
-To install navigate to the root directory of this repository and execute either of these commands.
+This is our version of the project generated using the cookiecutter template. There are two ways to install this project, either through `nox` or `pip`. `nox` uses `uv pip` or `pip` internally, and in this case creates a virtual environment for you to activate.
+To install, navigate to the root directory of this repository and execute either of these commands:
 
 `nox -s dev`
 or
 `pip install -e .[dev]`
 
-To check if the project was successfully installed import the project inside python.
+To check if the project was successfully installed, import the project inside Python.
 
 ```python
 import pybamm_cookiecutter
@@ -66,9 +67,9 @@ import pybamm_cookiecutter
 pybamm_cookiecutter._version.version
 ```
 
-## 🛠️ Contributing to PyBaMM
+## 🛠️ Contributing to `pybamm-cookiecutter`
 
-If you'd like to help us develop PyBaMM by adding new methods, writing documentation, or fixing embarrassing bugs, please have a look at these [guidelines](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/CONTRIBUTING.md) first.
+If you'd like to help us develop `pybamm-cookiecutter` by improving the template's features, writing documentation, or fixing embarrassing bugs, please have a look at these [guidelines](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/CONTRIBUTING.md).
 
 ## 📫 Get in touch
 
@@ -77,4 +78,4 @@ For any questions, comments, suggestions or bug reports, please see the
 
 ## 📃 License
 
-pybamm-cookiecutter is fully open source. For more information about its license, see [LICENSE](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE.txt).
+`pybamm-cookiecutter` is fully open source. For more information about its license, see [LICENSE](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE.txt).
