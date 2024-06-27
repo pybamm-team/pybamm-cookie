@@ -46,8 +46,11 @@ Install cookiecutter and generate the project using the pybamm-cookiecutter temp
 pip install cookiecutter
 cookiecutter pybamm-cookiecutter/
 ```
-
 Cookiecutter will prompt you with various configurations and you may choose the ones that suit your use case.
+
+**Note**: If you created a repository using this template within GitHub and cloned it locally, you can skip the next step.
+
+Once the project is generated through cookiecutter, initialise `git` by executing `git init` inside your project directory.
 
 
 ### Installing the `pybamm-cookiecutter` project
