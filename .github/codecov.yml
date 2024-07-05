@@ -1,0 +1,10 @@
+codecov:
+  token: ${{ secrets.CODECOV_TOKEN }}
+  ci:
+    - "test_on_push"
+  strict_yaml_branch: "main"
+  disable_default_path_fixes: no
+  require_ci_to_pass: yes
+
+github_checks:
+  annotations: true
