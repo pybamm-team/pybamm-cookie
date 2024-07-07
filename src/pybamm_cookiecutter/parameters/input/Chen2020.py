@@ -1,5 +1,5 @@
 """
-This code is adopted from the PyBaMM project under the BSD 3-Clause
+This code is adopted from the PyBaMM project under the BSD-3-Clause
 
 Copyright (c) 2018-2024, the PyBaMM team.
 All rights reserved.

@@ -63,14 +63,14 @@ class ParameterSets(Mapping):
     """
 
     def __init__(self):
-        '''Dict of entry points for parameter sets, lazily load entry points as'''
+        """Dict of entry points for parameter sets, lazily load entry points as"""
         self.__all_parameter_sets = dict()
         for entry_point in self.get_entries("cookie_parameter_sets"):
             self.__all_parameter_sets[entry_point.name] = entry_point
 
     @staticmethod
     def get_entries(group_name):
-        '''Wrapper for the importlib version logic'''
+        """Wrapper for the importlib version logic"""
         if sys.version_info < (3, 10):  # pragma: no cover
             return importlib.metadata.entry_points()[group_name]
         else:
@@ -87,8 +87,7 @@ class ParameterSets(Mapping):
 
     def _load_entry_point(self, key) -> Callable:
         """Check that ``key`` is a registered ``cookie_parameter_sets``,
-        and return the entry point for the parameter set, loading it needed.
-        """
+        and return the entry point for the parameter set, loading it needed."""
         if key not in self.__all_parameter_sets:
             raise KeyError(f"Unknown parameter set: {key}")
         ps = self.__all_parameter_sets[key]

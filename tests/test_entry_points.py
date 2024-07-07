@@ -9,7 +9,7 @@ def test_entry_points():
 
     entry_points = list(pybamm_cookiecutter.parameter_sets)
     parameter_sets = Path("src/pybamm_cookiecutter/parameters/input/").glob("*.py")
-    # Making a list Parameter sets in the parameters/input directory
+    # Making a list of parameter sets in the parameters/input directory
     parameter_sets = [x.stem for x in parameter_sets]
 
     assert parameter_sets == entry_points, "Entry points missing either in pyproject.toml or in the input directory"
