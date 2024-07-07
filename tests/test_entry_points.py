@@ -24,4 +24,4 @@ def test_entry_point_load():
     sys.modules["Chen2020mod"] = chen_module
     spec.loader.exec_module(chen_module)
     parameters_from_file = chen_module.get_parameter_values()
-    assert parameters.keys() == parameters_from_file.keys(), "The keys in the module and local input file are not the same"
+    assert parameters.keys() == parameters_from_file.keys(), f"The keys in the module and local input file are not the same, expected {parameters.keys} got {parameters_from_file.keys()}"
