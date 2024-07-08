@@ -8,8 +8,10 @@ from __future__ import annotations
 import pybamm
 
 from ._version import version as __version__
+from .parameters.parameter_sets import parameter_sets
 
 __all__ : list[str] = [
     "__version__",
     "pybamm",
+    "parameter_sets",
 ]
