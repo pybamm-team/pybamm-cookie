@@ -9,9 +9,13 @@ import pybamm
 
 from ._version import version as __version__
 from .parameters.parameter_sets import parameter_sets
+from .models.model import models, model_instance
 
 __all__ : list[str] = [
     "__version__",
     "pybamm",
     "parameter_sets",
+    "models",
+    "model_instance",
+
 ]
