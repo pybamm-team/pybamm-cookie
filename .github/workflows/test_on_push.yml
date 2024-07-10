@@ -6,6 +6,7 @@ on:
   push:
     branches:
     - main
+
 jobs:
   style:
     runs-on: ubuntu-latest
@@ -52,3 +53,13 @@ jobs:
       - name: Test Template Generation
         run: |
           nox -s test-generation
+
+      - name: Run coverage tests
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        run: python -m nox -s coverage
+
+      - name: Upload coverage report
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        uses: codecov/codecov-action@v4.5.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
