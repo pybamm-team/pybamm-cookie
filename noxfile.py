@@ -31,6 +31,14 @@ def run_template_generation(session):
     session.install("-e", ".[dev]", silent=False)
     session.run("pytest", "tests")
 
+@nox.session(name="coverage")
+def run_coverage(session):
+    """Run the coverage tests and generate an XML report."""
+    session.install("setuptools", silent=False)
+    session.install("coverage", silent=False)
+    session.install("-e", ".[all,dev,jax]", silent=False)
+    session.run("pytest", "--cov=src/pybamm_cookiecutter", "--cov-report=xml", "tests/")
+
 @nox.session(name="dev")
 def set_dev(session):
     """Install pybamm-cookiecutter in editable mode"""
