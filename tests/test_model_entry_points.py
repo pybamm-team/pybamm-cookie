@@ -7,7 +7,7 @@ from pathlib import Path
 def test_entry_points():
     """Test if the entry points are loaded correctly."""
 
-    entry_points = list(pybamm_cookiecutter.model_instance)
+    entry_points = list(pybamm_cookiecutter.models)
     models = Path("src/pybamm_cookiecutter/models/input/").glob("*.py")
     # Making a list Parameter sets in the parameters/input directory
     models = [x.stem for x in models]
@@ -17,5 +17,5 @@ def test_entry_points():
 def test_entry_point_load():
     """Testing if the values get loaded via parameter entry points and are equal when loaded through entry points"""
     # Loading parameter_sets through entry points
-    model_instance = pybamm_cookiecutter.models("SPM")
+    model_instance = pybamm_cookiecutter.Model("SPM")
     assert model_instance != None

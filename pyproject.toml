@@ -61,7 +61,7 @@ Homepage = "https://github.com/pybamm-team/pybamm-cookiecutter"
 Discussions = "https://github.com/pybamm-team/pybamm-cookiecutter/discussions"
 Changelog = "https://github.com/pybamm-team/pybamm-cookiecutter/releases"
 
-[project.entry-points."cookie_parameter_sets"]
+[project.entry-points."parameter_sets"]
 Chen2020 = "pybamm_cookiecutter.parameters.input.Chen2020:get_parameter_values"
 
 [project.entry-points."model_entry_points"]
