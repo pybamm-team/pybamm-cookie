@@ -61,8 +61,11 @@ class EntryPoint(Mapping):
         :footcite:t:`rieger2016new` and references therein.
         ...
 
-    See also: :ref:`adding-parameter-sets`
-
+        >>> print(pybamm_cookiecutter.models.get_docstring("SPM"))
+        <BLANKLINE>
+        Single Particle Model (SPM) model of a lithium-ion battery, from :footcite:t:`Marquis2019`. This class differs from the :class:`pybamm.lithium_ion.SPM` model class in that it shows the whole model in a single class. This comes at the cost of flexibility in combining different physical effects, and in general the main SPM class should be used instead.
+        ...
+        See also: :ref:`adding-parameter-sets`
     """
 
     _instances = 0
@@ -94,7 +97,7 @@ class EntryPoint(Mapping):
         return self._load_entry_point(key)()
 
     def _load_entry_point(self, key) -> Callable:
-        """Check that ``key`` is a registered ``parameter_sets`` or ``model_entry_points`` ,
+        """Check that ``key`` is a registered ``parameter_sets`` or ``models` ,
         and return the entry point for the parameter set/model, loading it needed."""
         if key not in self._all_entries:
             raise KeyError(f"Unknown parameter set or model: {key}")
@@ -125,7 +128,7 @@ class EntryPoint(Mapping):
 parameter_sets = EntryPoint(group="parameter_sets")
 
 #: Singleton Instance of :class:ModelEntryPoints"""
-models = EntryPoint(group="model_entry_points")
+models = EntryPoint(group="models")
 
 def Model(model:str):
     """
@@ -139,5 +142,13 @@ def Model(model:str):
     -------
     pybamm.model
         Model object of the initialised model.
+    Examples
+    --------
+    Listing available models:
+        >>> import pybamm_cookiecutter
+        >>> list(pybamm_cookiecutter.models)
+        ['SPM', ...]
+        >>> pybamm_cookiecutter.Model('Author/Year')
+        <pybamm_cookiecutter.models.input.SPM.SPM object>
     """
     return models[model]

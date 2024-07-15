@@ -64,7 +64,7 @@ Changelog = "https://github.com/pybamm-team/pybamm-cookiecutter/releases"
 [project.entry-points."parameter_sets"]
 Chen2020 = "pybamm_cookiecutter.parameters.input.Chen2020:get_parameter_values"
 
-[project.entry-points."model_entry_points"]
+[project.entry-points."models"]
 SPM = "pybamm_cookiecutter.models.input.SPM:SPM"
 
 [tool.hatch]
