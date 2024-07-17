@@ -13,13 +13,26 @@ def build_docs(session: nox.Session) -> None:
     """Build the documentation and load it in a browser tab, rebuilding on changes."""
     envbindir = session.bin
     session.install("-e", ".[docs]")
-    with session.chdir("docs/"):
+    session.chdir("docs/")
+    # For local development
+    if session.interactive:
         session.run(
             "sphinx-autobuild",
             "-j",
             "auto",
             "--open-browser",
             "-qT",
+            ".",
+            f"{envbindir}/../tmp/html",
+        )
+    # For CI testing if documentation builds
+    else:
+        session.run(
+            "sphinx-build",
+            "-b",
+            "html",
+            "-W",
+            "--keep-going",
             ".",
             f"{envbindir}/../tmp/html",
         )
