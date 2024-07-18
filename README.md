@@ -84,5 +84,6 @@ For any questions, comments, suggestions or bug reports, please see the
 
 ## 📃 License
 
-`pybamm-cookiecutter` is fully open source. For more information about its license, see [LICENSE](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE).
+The `pybamm-cookiecutter` project is open source code. For more information about its license, see [LICENSE](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE).
+
 <!-- SPHINX-END -->
