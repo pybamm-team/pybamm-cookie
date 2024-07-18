@@ -40,4 +40,4 @@ def test_model_entry_point_load():
     """Testing if the model gets initialised and returned."""
     # Loading parameter_sets through entry points
     model_instance = pybamm_cookiecutter.Model("SPM")
-    assert model_instance != None
+    assert model_instance is not None
