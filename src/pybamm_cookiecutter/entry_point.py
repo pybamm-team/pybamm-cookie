@@ -37,10 +37,11 @@ import textwrap
 from collections.abc import Mapping
 from typing import Callable
 
-class ParameterSets(Mapping):
+class EntryPoint(Mapping):
     """
-    Dict-like interface for accessing parameter sets through entry points in cookiecutter template.
-    Access via :py:data:`pybamm_cookiecutter.parameter_sets`
+    Dict-like interface for accessing parameter sets and models through entry points in cookiecutter template.
+    Access via :py:data:`pybamm_cookiecutter.parameter_sets` for parameter_sets
+    Access via :py:data:`pybamm_cookiecutter.Model` for Models
 
     Examples
     --------
@@ -48,8 +49,10 @@ class ParameterSets(Mapping):
         >>> import pybamm_cookiecutter
         >>> list(pybamm_cookiecutter.parameter_sets)
         ['Chen2020', ...]
+        >>> list(pybamm_cookiecutter.models)
+        ['SPM', ...]
 
-    Get the docstring for a parameter set:
+    Get the docstring for a parameter set/model:
 
 
         >>> print(pybamm_cookiecutter.parameter_sets.get_docstring("Ai2020"))
@@ -58,15 +61,23 @@ class ParameterSets(Mapping):
         :footcite:t:`rieger2016new` and references therein.
         ...
 
-    See also: :ref:`adding-parameter-sets`
-
+        >>> print(pybamm_cookiecutter.models.get_docstring("SPM"))
+        <BLANKLINE>
+        Single Particle Model (SPM) model of a lithium-ion battery, from :footcite:t:`Marquis2019`. This class differs from the :class:`pybamm.lithium_ion.SPM` model class in that it shows the whole model in a single class. This comes at the cost of flexibility in combining different physical effects, and in general the main SPM class should be used instead.
+        ...
+        See also: :ref:`adding-parameter-sets`
     """
 
-    def __init__(self):
-        """Dict of entry points for parameter sets, lazily load entry points as"""
-        self.__all_parameter_sets = dict()
-        for entry_point in self.get_entries("cookie_parameter_sets"):
-            self.__all_parameter_sets[entry_point.name] = entry_point
+    _instances = 0
+    def __init__(self, group):
+        """Dict of entry points for parameter sets or models, lazily load entry points as"""
+        if not hasattr(self, 'initialized'):    # Ensure __init__ is called once per instance
+            self.initialized = True
+            EntryPoint._instances += 1
+            self._all_entries = dict()
+            self.group = group
+            for entry_point in self.get_entries(self.group):
+                self._all_entries[entry_point.name] = entry_point
 
     @staticmethod
     def get_entries(group_name):
@@ -76,9 +87,9 @@ class ParameterSets(Mapping):
         else:
             return importlib.metadata.entry_points(group=group_name)
 
-    def __new__(cls):
-        """Ensure only one instance of ParameterSets exists"""
-        if not hasattr(cls, "instance"):
+    def __new__(cls, group):
+        """Ensure only two instances of entry points exist, one for parameter sets and the other for models"""
+        if EntryPoint._instances < 2:
             cls.instance = super().__new__(cls)
         return cls.instance
 
@@ -86,25 +97,25 @@ class ParameterSets(Mapping):
         return self._load_entry_point(key)()
 
     def _load_entry_point(self, key) -> Callable:
-        """Check that ``key`` is a registered ``cookie_parameter_sets``,
-        and return the entry point for the parameter set, loading it needed."""
-        if key not in self.__all_parameter_sets:
-            raise KeyError(f"Unknown parameter set: {key}")
-        ps = self.__all_parameter_sets[key]
+        """Check that ``key`` is a registered ``parameter_sets`` or ``models` ,
+        and return the entry point for the parameter set/model, loading it needed."""
+        if key not in self._all_entries:
+            raise KeyError(f"Unknown parameter set or model: {key}")
+        ps = self._all_entries[key]
         try:
-            ps = self.__all_parameter_sets[key] = ps.load()
+            ps = self._all_entries[key] = ps.load()
         except AttributeError:
             pass
         return ps
 
     def __iter__(self):
-        return self.__all_parameter_sets.__iter__()
+        return self._all_entries.__iter__()
 
     def __len__(self) -> int:
-        return len(self.__all_parameter_sets)
+        return len(self._all_entries)
 
     def get_docstring(self, key):
-        """Return the docstring for the ``key`` parameter set"""
+        """Return the docstring for the ``key`` parameter set or model"""
         return textwrap.dedent(self._load_entry_point(key).__doc__)
 
     def __getattribute__(self, name):
@@ -114,4 +125,30 @@ class ParameterSets(Mapping):
               raise error
 
 #: Singleton Instance of :class:ParameterSets """
-parameter_sets = ParameterSets()
+parameter_sets = EntryPoint(group="parameter_sets")
+
+#: Singleton Instance of :class:ModelEntryPoints"""
+models = EntryPoint(group="models")
+
+def Model(model:str):
+    """
+    Returns the loaded model object
+
+    Parameters
+    ----------
+    model : str
+        The model name or author name of the model mentioned at the model entry point.
+    Returns
+    -------
+    pybamm.model
+        Model object of the initialised model.
+    Examples
+    --------
+    Listing available models:
+        >>> import pybamm_cookiecutter
+        >>> list(pybamm_cookiecutter.models)
+        ['SPM', ...]
+        >>> pybamm_cookiecutter.Model('Author/Year')
+        <pybamm_cookiecutter.models.input.SPM.SPM object>
+    """
+    return models[model]
