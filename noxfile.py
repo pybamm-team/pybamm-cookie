@@ -11,31 +11,30 @@ VENV_DIR = Path("./venv").resolve()
 @nox.session(name="docs")
 def build_docs(session: nox.Session) -> None:
     """Build the documentation and load it in a browser tab, rebuilding on changes."""
-    envbindir = session.bin
     session.install("-e", ".[docs]")
-    session.chdir("docs/")
-    # For local development
-    if session.interactive:
-        session.run(
-            "sphinx-autobuild",
-            "-j",
-            "auto",
-            "--open-browser",
-            "-qT",
-            ".",
-            f"{envbindir}/../tmp/html",
-        )
-    # For CI testing if documentation builds
-    else:
-        session.run(
-            "sphinx-build",
-            "-b",
-            "html",
-            "-W",
-            "--keep-going",
-            ".",
-            f"{envbindir}/../tmp/html",
-        )
+    with session.chdir("docs/"):
+        # For local development
+        if session.interactive:
+            session.run(
+                "sphinx-autobuild",
+                "-j",
+                "auto",
+                "--open-browser",
+                "-qT",
+                ".",
+                "build/html/",
+            )
+        # For CI testing if documentation builds
+        else:
+            session.run(
+                "sphinx-build",
+                "-b",
+                "html",
+                "-W",
+                "--keep-going",
+                ".",
+                "build/html/",
+            )
 
 @nox.session(name="test-generation")
 def run_template_generation(session):
