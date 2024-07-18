@@ -22,9 +22,11 @@
 [pypi-version]:             https://img.shields.io/pypi/v/pybamm-cookiecutter
 [rtd-badge]:                https://readthedocs.org/projects/pybamm-cookiecutter/badge/?version=latest
 [rtd-link]:                 https://pybamm-cookiecutter.readthedocs.io/en/latest/?badge=latest -->
+
+<!-- SPHINX-START -->
 [![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
 
-This repository contains a `cookiecutter` template for battery modeling projects using PyBaMM, released under the [BSD-3-Clause license](LICENSE). Currently under active development.
+This repository contains a `cookiecutter` template for battery modeling projects using PyBaMM, released under the [BSD-3-Clause license](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE). Currently under active development.
 
 ## 📄 Using `pybamm-cookiecutter`
 
@@ -82,4 +84,6 @@ For any questions, comments, suggestions or bug reports, please see the
 
 ## 📃 License
 
-`pybamm-cookiecutter` is fully open source. For more information about its license, see [LICENSE](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE.txt).
+The `pybamm-cookiecutter` project is open source code. For more information about its license, see [LICENSE](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE).
+
+<!-- SPHINX-END -->
