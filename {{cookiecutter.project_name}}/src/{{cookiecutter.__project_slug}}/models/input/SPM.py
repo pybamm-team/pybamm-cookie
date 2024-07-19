@@ -36,6 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 import pybamm
 
+
 class SPM(pybamm.lithium_ion.BaseModel):
     """Single Particle Model (SPM) model of a lithium-ion battery, from
     :footcite:t:`Marquis2019`.

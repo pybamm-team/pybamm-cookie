@@ -35,6 +35,8 @@ from __future__ import annotations
 
 import numpy as np
 import pybamm
+
+
 def graphite_LGM50_ocp_Chen2020(sto):
     """
     LG M50 Graphite open-circuit potential as a function of stochiometry, fit taken
