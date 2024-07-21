@@ -47,7 +47,7 @@ classifiers = [
 {%- if cookiecutter.backend == "hatch" %}
 dynamic = ["version"]
 {%- endif %}
-dependencies = ["pybamm", "cookiecutter"]
+dependencies = ["pybamm",]
 
 [project.optional-dependencies]
 dev = [
@@ -55,7 +55,6 @@ dev = [
   "pytest-cov >=3",
   "nox[uv]",
   "pre-commit",
-  "pytest-cookies",
 ]
 docs = [
   "sphinx",

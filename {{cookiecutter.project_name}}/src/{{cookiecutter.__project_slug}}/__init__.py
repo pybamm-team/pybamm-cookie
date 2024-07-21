@@ -13,18 +13,12 @@ from .entry_point import Model, parameter_sets, models
 {# keep this line here for newline #}
 {%- if cookiecutter.mypy %}
 __all__: list[str] = [
-    "__version__",
-    "pybamm",
-    "parameter_sets",
-    "Model",
-    "models",
-]
 {%- else %}
 __all__ = [
+{%- endif %}
     "__version__",
     "pybamm",
     "parameter_sets",
     "Model",
     "models",
 ]
-{%- endif %}

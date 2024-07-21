@@ -1,5 +1,5 @@
 {
-    "project_name": "pybamm-example-project",
+    "project_name": "pybamm_example_project",
     "platform": [
         "github",
         "gitlab"
@@ -20,6 +20,7 @@
     "mypy": false,
     "__year": "{% now 'utc', '%Y' %}",
     "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
+    "_copy_without_render": ["*.yml"],
     "__type": "{{ 'pure' }}",
     "__answers": "",
     "__ci": "{{ cookiecutter.platform }}",
@@ -31,7 +32,7 @@
             "gitlab": "GitLab"
         },
         "org": "The name of your organisation (or username, if you are not part of an organisation)",
-        "url": "The URL to your repository",
+     "url": "The URL to your repository",
         "full_name": "Your name",
         "email": "Your email",
         "project_short_description": "A short description of your project",

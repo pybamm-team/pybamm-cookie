@@ -1,4 +1,4 @@
-name: Test template and generated project
+name: Project Tests
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ jobs:
           python -m pip install pre-commit
           pre-commit run -a
 
-  template_test:
+  test_project:
     needs: style
     runs-on: ${{ matrix.os }}
     strategy:
@@ -50,13 +50,13 @@ jobs:
       - name: Install nox
         run: uv pip install nox[uv]
 
-      - name: Test template generation
-        run: |
-          nox -s template-tests
-
       - name: Test project units
         run: |
-          nox -s project-tests
+          nox -s generated-project-tests
+
+      - name: Test user tests
+        run: |
+          nox -s user-tests
 
       - name: Run coverage tests
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
@@ -90,36 +90,3 @@ jobs:
 
       - name: Check if the documentation can be built
         run: python -m nox -s docs
-
-  generated_project_tests:
-      needs: [style, template_test]
-      runs-on: ${{ matrix.os }}
-      strategy:
-        fail-fast: false
-        matrix:
-          os: [ubuntu-latest, macos-13, macos-14, windows-latest]
-          python-version: ["3.9", "3.10", "3.11", "3.12"]
-      name:
-        Generated Project Tests (${{ matrix.os }} / Python ${{ matrix.python-version }})
-      steps:
-        - name: Checkout pybamm-cookiecutter
-          uses: actions/checkout@v4
-
-        - name: Set up Python ${{ matrix.python-version }}
-          id: setup-python
-          uses: actions/setup-python@v5
-          with:
-            python-version: ${{ matrix.python-version }}
-
-        - name: Install cookiecutter and pipx
-          run: python -m pip install cookiecutter pipx
-
-        - name: Generate a project using cookiecutter
-          run: |
-            cookiecutter . --no-input
-
-        - name: Install nox and test generated project
-          working-directory: ./pybamm_example_project
-          run: |
-            pipx install nox
-            pipx run nox -s generated-project-tests

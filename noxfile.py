@@ -36,12 +36,19 @@ def build_docs(session: nox.Session) -> None:
                 "build/html/",
             )
 
-@nox.session(name="test-generation")
+@nox.session(name="template-tests")
 def run_template_generation(session):
     """Run the tests for testing template generation"""
     session.install("setuptools", silent=False)
     session.install("-e", ".[dev]", silent=False)
-    session.run("pytest", "tests")
+    session.run("pytest", "tests/template_tests")
+
+@nox.session(name="project-tests")
+def run_project_tests(session):
+    """Run the tests for testing template generation"""
+    session.install("setuptools", silent=False)
+    session.install("-e", ".[dev]", silent=False)
+    session.run("pytest", "tests/project_tests")
 
 @nox.session(name="coverage")
 def run_coverage(session):
