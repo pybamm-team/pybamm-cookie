@@ -8,9 +8,17 @@ from __future__ import annotations
 {%- endif %}
 
 from ._version import version as __version__
+import pybamm
+from .entry_point import Model, parameter_sets, models
 {# keep this line here for newline #}
 {%- if cookiecutter.mypy %}
-__all__: tuple[str] = ("__version__",)
+__all__: list[str] = [
 {%- else %}
-__all__ = ("__version__",)
+__all__ = [
 {%- endif %}
+    "__version__",
+    "pybamm",
+    "parameter_sets",
+    "Model",
+    "models",
+]
