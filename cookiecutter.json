@@ -6,6 +6,7 @@
     ],
     "org": "pybamm-team",
     "url": "https://{{ cookiecutter.platform }}.com/{{ cookiecutter.org }}/{{ cookiecutter.project_name }}",
+    "branch": "main",
     "full_name": "John Doe",
     "email": "john@doe.com",
     "project_short_description": "A template for creating battery modeling projects based on PyBaMM",
@@ -31,7 +32,8 @@
             "gitlab": "GitLab"
         },
         "org": "The name of your organisation (or username, if you are not part of an organisation)",
-        "url": "The URL to your repository",
+        "url": "The Origin URL to your repository",
+        "branch": "The default branch of your repository",
         "full_name": "Your name",
         "email": "Your email",
         "project_short_description": "A short description of your project",
