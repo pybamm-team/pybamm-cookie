@@ -4,6 +4,7 @@ import importlib.util
 import sys
 from pathlib import Path
 
+
 def test_parameter_sets_entry_points():
     """Test if the parameter_sets via entry points are loaded correctly."""
 
@@ -13,6 +14,7 @@ def test_parameter_sets_entry_points():
     parameter_sets = [x.stem for x in parameter_sets]
 
     assert parameter_sets == entry_points, "Entry points missing either in pyproject.toml or in the input directory"
+
 
 def test_parameter_sets_entry_point_load():
     """Testing if the values get loaded via parameter entry points and are equal when loaded through entry points"""
