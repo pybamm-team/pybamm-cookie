@@ -2,7 +2,9 @@
 {%- if cookiecutter.backend == "hatch" %}
 requires = [
   "hatchling",
-  "hatch-vcs"
+{%- if cookiecutter.hatch_vcs == true %}
+  "hatch-vcs",
+{%- endif %}
 ]
 build-backend = "hatchling.build"
 {%- endif %}
@@ -86,11 +88,18 @@ SPM = "{{ cookiecutter.__project_slug }}.models.input.SPM:SPM"
 {# keep this line here for newline #}
 {%- if cookiecutter.backend == "hatch" %}
 [tool.hatch]
+{%- if cookiecutter.hatch_vcs == true %}
 version.source = "vcs"
 build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.py"
+{%- endif %}
 envs.default.dependencies = [
   "pybamm",
 ]
+{%- endif %}
+
+{%- if cookiecutter.hatch_vcs == false %}
+[tool.hatch.version]
+path = "src/{{ cookiecutter.__project_slug }}/version.pyi"
 {%- endif %}
 {# keep this line here for newline #}
 {%- if cookiecutter.mypy %}
