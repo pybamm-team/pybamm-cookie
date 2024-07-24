@@ -116,7 +116,7 @@ jobs:
           run: cookiecutter . --no-input
 
         - name: Install nox and test generated project
-          working-directory: ./pybamm_example_project
+          working-directory: ./pybamm-example-project
           run: |
             pipx install nox
             pipx run nox -s generated-project-tests
