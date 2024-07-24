@@ -90,7 +90,7 @@ SPM = "{{ cookiecutter.__project_slug }}.models.input.SPM:SPM"
 [tool.hatch]
 {%- if cookiecutter.hatch_vcs == true %}
 version.source = "vcs"
-build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/version.py"
+build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.py"
 {%- endif %}
 envs.default.dependencies = [
   "pybamm",
@@ -99,7 +99,7 @@ envs.default.dependencies = [
 
 {%- if cookiecutter.hatch_vcs == false %}
 [tool.hatch.version]
-path = "src/{{ cookiecutter.__project_slug }}/version.py"
+path = "src/{{ cookiecutter.__project_slug }}/__init__.py"
 {%- endif %}
 {# keep this line here for newline #}
 {%- if cookiecutter.mypy %}

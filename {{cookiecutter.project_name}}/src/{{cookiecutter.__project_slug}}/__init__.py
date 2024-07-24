@@ -7,7 +7,11 @@ Copyright (c) {{ cookiecutter.__year }} {{ cookiecutter.full_name }}. All rights
 from __future__ import annotations
 {%- endif %}
 
-from .version import __version__
+{%- if cookiecutter.hatch_vcs %}
+from ._version import version as __version__
+{%- else %}
+__version__ = "0.1.0"
+{%- endif %}
 import pybamm
 from .entry_point import Model, parameter_sets, models
 {# keep this line here for newline #}
@@ -16,7 +20,9 @@ __all__: list[str] = [
 {%- else %}
 __all__ = [
 {%- endif %}
+{%- if cookiecutter.hatch_vcs %}
     "__version__",
+{%- endif %}
     "pybamm",
     "parameter_sets",
     "Model",
