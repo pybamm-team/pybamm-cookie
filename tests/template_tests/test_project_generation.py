@@ -12,7 +12,7 @@ def test_bake_project(cookies: Cookies):
     result = cookies.bake()
     assert result.exit_code == 0, f"Exited with code {result.exit_code}, expected 0"
     assert result.exception is None, result.exception
-    assert result.project_path.name == "pybamm_example_project"
+    assert result.project_path.name == "pybamm-example-project"
     assert result.project_path.is_dir(), f"Project directory {result.project_path} not found"
 
 
