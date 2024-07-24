@@ -53,10 +53,9 @@ def run_user_tests(session):
 @nox.session(name="coverage")
 def run_coverage(session):
     """Run the coverage tests and generate an XML report."""
-    session.install("setuptools", silent=False)
-    session.install("coverage", silent=False)
-    session.install("-e", ".[all,dev,jax]", silent=False)
-    session.run("pytest", "--cov=src/pybamm_cookiecutter", "--cov-report=xml", "tests/")
+    session.posargs.append("--cov=src/pybamm_cookiecutter")
+    session.posargs.append("--cov-report=xml")
+    run_user_tests(session)
 
 @nox.session(name="dev")
 def set_dev(session):

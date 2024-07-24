@@ -51,16 +51,14 @@ jobs:
         run: uv pip install nox[uv]
 
       - name: Test project units
-        run: |
-          nox -s generated-project-tests
+        run: nox -s generated-project-tests
 
       - name: Test user tests
-        run: |
-          nox -s user-tests
+        run: nox -s user-tests
 
       - name: Run coverage tests
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
-        run: python -m nox -s coverage
+        run: nox -s coverage
 
       - name: Upload coverage report
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
@@ -76,8 +74,6 @@ jobs:
     steps:
       - name: Check out pybamm-cookiecutter repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -89,4 +85,4 @@ jobs:
         run: python -m pip install nox
 
       - name: Check if the documentation can be built
-        run: python -m nox -s docs
+        run: nox -s docs
