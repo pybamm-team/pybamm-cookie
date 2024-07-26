@@ -18,7 +18,7 @@
     "backend": [
         "hatch"
     ],
-    "hatch_vcs": false,
+    "vcs": false,
     "mypy": false,
     "__year": "{% now 'utc', '%Y' %}",
     "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
@@ -43,7 +43,7 @@
         "backend": {
             "__prompt__": "Choose a build backend",
             "hatch": "Hatchling (recommended for pure Python projects)",
-              "hatch_vcs": "Enable hatch version control (vcs)?"
+              "vcs": "Enable hatch version control (vcs)?"
         },
         "mypy": "Use mypy and static types"
     }
