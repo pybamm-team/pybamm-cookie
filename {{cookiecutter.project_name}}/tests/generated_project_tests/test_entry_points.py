@@ -26,7 +26,7 @@ def test_parameter_sets_entry_point_load():
     sys.modules["Chen2020mod"] = chen_module
     spec.loader.exec_module(chen_module)
     parameters_from_file = chen_module.get_parameter_values()
-    assert parameters.keys() == parameters_from_file.keys(), f"The keys in the module and local input file are not the same, expected {parameters.keys} got {parameters_from_file.keys()}"
+    assert parameters.keys() == parameters_from_file.keys(), f"The keys in the module and local input file are not the same, expected {parameters.keys}, got {parameters_from_file.keys()}"
 
 def test_model_entry_points():
     """Test if the models via entry points are loaded correctly."""
@@ -37,6 +37,7 @@ def test_model_entry_points():
     models = [x.stem for x in models]
 
     assert models == entry_points, "Entry points missing either in pyproject.toml or in the input directory"
+
 
 def test_model_entry_point_load():
     """Testing if the model gets initialised and returned."""

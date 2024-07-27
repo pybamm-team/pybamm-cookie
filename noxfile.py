@@ -43,6 +43,7 @@ def run_template_generation(session):
     session.install("-e", ".[dev]", silent=False)
     session.run("pytest", "tests/template_tests")
 
+
 @nox.session(name="project-tests")
 def run_project_tests(session):
     """Run the tests for testing template generation"""

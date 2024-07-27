@@ -36,12 +36,14 @@ def build_docs(session: nox.Session) -> None:
                 "build/html/",
             )
 
+
 @nox.session(name="generated-project-tests")
 def run_generated_project_tests(session):
     """Run the tests for testing units inside generated project"""
     session.install("setuptools", silent=False)
     session.install("-e", ".[dev]", silent=False)
     session.run("pytest", "tests/generated_project_tests")
+
 
 @nox.session(name="user-tests")
 def run_user_tests(session):
@@ -50,12 +52,14 @@ def run_user_tests(session):
     session.install("-e", ".[dev]", silent=False)
     session.run("pytest", "tests/user_tests")
 
+
 @nox.session(name="coverage")
 def run_coverage(session):
     """Run the coverage tests and generate an XML report."""
     session.posargs.append("--cov=src/pybamm_cookiecutter")
     session.posargs.append("--cov-report=xml")
     run_user_tests(session)
+
 
 @nox.session(name="dev")
 def set_dev(session):
