@@ -38,12 +38,12 @@ branch:
 full_name:
   type: str
   default: "John Doe"
-  help: "Your name"
+  help: "Your name on your hosting platform (will be used later as your committer name)"
 
 email:
   type: str
   default: "john@doe.com"
-  help: "Your email"
+  help: "Your email for your hosting platform (will be used later to configure Git)"
 
 project_short_description:
   type: str
@@ -53,28 +53,28 @@ project_short_description:
 license:
   type: str
   choices:
-    - BSD
+    - BSD-3-Clause
     - Apache
     - MIT
-  default: BSD
+  default: BSD-3-Clause
   help: "Select a license"
 
 backend:
   type: str
   choices:
-    - hatch
-  default: hatch
+    - "hatch (hatchling)"
+  default: "hatch (hatching)"
   help: "Choose a build backend"
 
 vcs:
   type: bool
   default: false
-  help: "Let hatch get the version from your version control system (Git/Mercurial/SVN)?"
+  help: "Let hatch get the version from your version control system (Git/Mercurial/SVN) using the hatch-vcs plugin?"
 
 mypy:
   type: bool
   default: false
-  help: "Use mypy and static types"
+  help: "Use the mypy type checker"
 
 
 _copy_without_render:
