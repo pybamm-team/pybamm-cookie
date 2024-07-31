@@ -43,7 +43,7 @@
         "backend": {
             "__prompt__": "Choose a build backend",
             "hatch": "Hatchling (recommended for pure Python projects)",
-              "vcs": "Let hatch get the version from your version control system (Git/Mercurial/SVN)?"
+              "vcs": "Obtain the version from your version control system (Git/Mercurial/SVN)?"
         },
         "mypy": "Use mypy and static types"
     }

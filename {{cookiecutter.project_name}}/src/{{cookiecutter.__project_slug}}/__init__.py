@@ -20,9 +20,7 @@ __all__: list[str] = [
 {%- else %}
 __all__ = [
 {%- endif %}
-{%- if cookiecutter.vcs %}
     "__version__",
-{%- endif %}
     "pybamm",
     "parameter_sets",
     "Model",

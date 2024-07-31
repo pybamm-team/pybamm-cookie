@@ -2,7 +2,7 @@
 {%- if cookiecutter.backend == "hatch" %}
 requires = [
   "hatchling",
-{%- if cookiecutter.backend == "hatch" and cookiecutter.vcs == true %}
+{%- if cookiecutter.vcs == true %}
   "hatch-vcs",
 {%- endif %}
 ]
@@ -88,7 +88,7 @@ SPM = "{{ cookiecutter.__project_slug }}.models.input.SPM:SPM"
 {# keep this line here for newline #}
 {%- if cookiecutter.backend == "hatch" %}
 [tool.hatch]
-{%- if cookiecutter.backend == "hatch" and cookiecutter.vcs == true %}
+{%- if cookiecutter.vcs == true %}
 version.source = "vcs"
 build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.py"
 {%- endif %}
