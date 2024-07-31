@@ -1,4 +1,4 @@
-name: Test template and generated project
+name: Project Tests
 
 on:
   workflow_dispatch:
@@ -17,17 +17,12 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: Set up uv
-        uses: yezz123/setup-uv@v4
-        with:
-          uv-venv: ".venv"
-
       - name: Check style
         run: |
-          uv pip install pre-commit
+          python -m pip install pre-commit
           pre-commit run -a
 
-  template_test:
+  test_project:
     needs: style
     runs-on: ${{ matrix.os }}
     strategy:
@@ -40,6 +35,8 @@ jobs:
     steps:
       - name: Checkout pybamm-cookiecutter
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python ${{ matrix.python-version }}
         id: setup-python
@@ -55,11 +52,11 @@ jobs:
       - name: Install nox
         run: uv pip install nox[uv]
 
-      - name: Test template generation
-        run: nox -s template-tests
+      - name: Test project units
+        run: nox -s generated-project-tests
 
-      - name: Test project
-        run: nox -s project-tests
+      - name: Test user tests
+        run: nox -s user-tests
 
       - name: Run coverage tests
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
@@ -79,8 +76,6 @@ jobs:
     steps:
       - name: Check out pybamm-cookiecutter repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -97,40 +92,3 @@ jobs:
 
       - name: Check if the documentation can be built
         run: nox -s docs
-
-  generated_project_tests:
-      needs: [template_test]
-
-      runs-on: ${{ matrix.os }}
-      strategy:
-        fail-fast: false
-        matrix:
-          os: [ubuntu-latest, macos-13, macos-14, windows-latest]
-          python-version: ["3.9", "3.10", "3.11", "3.12"]
-      name:
-        Generated Project Tests (${{ matrix.os }} / Python ${{ matrix.python-version }})
-      steps:
-        - name: Checkout pybamm-cookiecutter
-          uses: actions/checkout@v4
-
-        - name: Set up Python ${{ matrix.python-version }}
-          uses: actions/setup-python@v5
-          with:
-            python-version: ${{ matrix.python-version }}
-
-        - name: Install cookiecutter and generate a project
-          run: |
-            python -m pip install cookiecutter
-            cookiecutter . --no-input
-
-        - name: Set up uv
-          uses: yezz123/setup-uv@v4
-          with:
-            uv-venv: ".venv"
-
-        - name: Install nox
-          uses: wntrblm/nox@2024.04.15
-
-        - name: Test the generated project
-          working-directory: ./pybamm-example-project
-          run: nox -s generated-project-tests

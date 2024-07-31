@@ -35,20 +35,28 @@ def build_docs(session: nox.Session) -> None:
                 ".",
                 "build/html/",
             )
-
-@nox.session(name="test-generation")
-def run_template_generation(session):
-    """Run the tests for testing template generation"""
+def install_and_run_tests(session, test_dir):
+    """Install dependencies and run tests in the specified directory."""
     session.install("setuptools", silent=False)
     session.install("-e", ".[dev]", silent=False)
-    session.run("pytest", "tests")
+    session.run("pytest", test_dir)
+
+@nox.session(name="template-tests")
+def run_template_generation(session):
+    """Run tests for the template generation."""
+    install_and_run_tests(session, "tests/template_tests")
+
+@nox.session(name="project-tests")
+def run_project_tests(session):
+    """Run the tests for testing project units"""
+    install_and_run_tests(session, "tests/project_tests")
 
 @nox.session(name="coverage")
 def run_coverage(session):
     """Run the coverage tests and generate an XML report."""
     session.install("setuptools", silent=False)
     session.install("coverage", silent=False)
-    session.install("-e", ".[all,dev,jax]", silent=False)
+    session.install("-e", ".[dev]", silent=False)
     session.run("pytest", "--cov=src/pybamm_cookiecutter", "--cov-report=xml", "tests/")
 
 @nox.session(name="dev")

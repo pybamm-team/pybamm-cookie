@@ -2,7 +2,9 @@
 {%- if cookiecutter.backend == "hatch" %}
 requires = [
   "hatchling",
-  "hatch-vcs"
+{%- if cookiecutter.vcs == true %}
+  "hatch-vcs",
+{%- endif %}
 ]
 build-backend = "hatchling.build"
 {%- endif %}
@@ -87,11 +89,18 @@ BasicReservoir = "{{ cookiecutter.__project_slug }}.models.input.basic_reservoir
 {# keep this line here for newline #}
 {%- if cookiecutter.backend == "hatch" %}
 [tool.hatch]
+{%- if cookiecutter.vcs == true %}
 version.source = "vcs"
 build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.py"
+{%- endif %}
 envs.default.dependencies = [
   "pybamm",
 ]
+{%- endif %}
+
+{%- if cookiecutter.backend == "hatch" and cookiecutter.vcs == false %}
+[tool.hatch.version]
+path = "src/{{ cookiecutter.__project_slug }}/__init__.py"
 {%- endif %}
 {# keep this line here for newline #}
 {%- if cookiecutter.mypy %}
