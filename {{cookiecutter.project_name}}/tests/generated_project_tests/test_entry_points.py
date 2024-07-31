@@ -8,10 +8,10 @@ from pathlib import Path
 def test_parameter_sets_entry_points():
     """Test if the parameter_sets via entry points are loaded correctly."""
 
-    entry_points = list({{ cookiecutter.__project_slug }}.parameter_sets)
+    entry_points = list({{ cookiecutter.__project_slug }}.parameter_sets).sort()
     parameter_sets = Path("src/{{ cookiecutter.__project_slug }}/parameters/input/").glob("*.py")
     # Making a list of parameter sets in the parameters/input directory
-    parameter_sets = [x.stem for x in parameter_sets]
+    parameter_sets = [x.stem for x in parameter_sets].sort()
 
     assert parameter_sets == entry_points, "Entry points missing either in pyproject.toml or in the input directory"
 
@@ -31,10 +31,10 @@ def test_parameter_sets_entry_point_load():
 def test_model_entry_points():
     """Test if the models via entry points are loaded correctly."""
 
-    entry_points = list({{ cookiecutter.__project_slug }}.models)
+    entry_points = list({{ cookiecutter.__project_slug }}.models).sort()
     models = Path("src/{{ cookiecutter.__project_slug }}/models/input/").glob("*.py")
     # Making a list Parameter sets in the parameters/input directory
-    models = [x.stem for x in models]
+    models = [x.stem for x in models].sort()
 
     assert models == entry_points, "Entry points missing either in pyproject.toml or in the input directory"
 
