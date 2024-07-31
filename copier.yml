@@ -63,7 +63,7 @@ backend:
   type: str
   choices:
     - "hatch"
-  default: "hatch (hatching)"
+  default: "hatch"
   help: "Choose a build backend. hatch (hatchling) recommended for pure python projects"
 
 vcs:
