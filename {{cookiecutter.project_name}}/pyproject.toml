@@ -82,7 +82,7 @@ Chen2020 = "{{ cookiecutter.__project_slug }}.parameters.input.Chen2020:get_para
 
 [project.entry-points."models"]
 SPM = "{{ cookiecutter.__project_slug }}.models.input.spm:SPM"
-Reservoir = "{{ cookiecutter.__project_slug }}.models.input.basic_reservoir:BasicReservoir"
+BasicReservoir = "{{ cookiecutter.__project_slug }}.models.input.basic_reservoir:BasicReservoir"
 
 {# keep this line here for newline #}
 {%- if cookiecutter.backend == "hatch" %}
