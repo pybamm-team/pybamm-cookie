@@ -2,11 +2,7 @@
 {%- if backend == "hatch" %}
 requires = [
   "hatchling",
-<<<<<<< Updated upstream:{{cookiecutter.project_name}}/pyproject.toml
-{%- if cookiecutter.vcs == true %}
-=======
 {%- if backend == "hatch" and vcs == true %}
->>>>>>> Stashed changes:template/pyproject.toml.jinja
   "hatch-vcs",
 {%- endif %}
 ]
@@ -92,11 +88,7 @@ SPM = "{{ project_slug }}.models.input.SPM:SPM"
 {# keep this line here for newline #}
 {%- if backend == "hatch" %}
 [tool.hatch]
-<<<<<<< Updated upstream:{{cookiecutter.project_name}}/pyproject.toml
-{%- if cookiecutter.vcs == true %}
-=======
 {%- if backend == "hatch" and vcs == true %}
->>>>>>> Stashed changes:template/pyproject.toml.jinja
 version.source = "vcs"
 build.hooks.vcs.version-file = "src/{{ project_slug }}/_version.py"
 {%- endif %}

@@ -62,9 +62,9 @@ license:
 backend:
   type: str
   choices:
-    - "hatch (hatchling)"
+    - "hatch"
   default: "hatch (hatching)"
-  help: "Choose a build backend"
+  help: "Choose a build backend. hatch (hatchling) recommended for pure python projects"
 
 vcs:
   type: bool
