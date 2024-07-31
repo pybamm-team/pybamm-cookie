@@ -56,14 +56,6 @@ repos:
       - id: rst-directive-colons
       - id: rst-inline-touching-normal
 
-  # Jupyter notebooks
-
-  - repo: https://github.com/nbQA-dev/nbQA
-    rev: "1.8.5"
-    hooks:
-      - id: nbqa-ruff
-        additional_dependencies: [ruff==0.0.281]
-
   # mypy
 
   - repo: https://github.com/pre-commit/mirrors-mypy

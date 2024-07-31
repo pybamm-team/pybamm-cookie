@@ -19,11 +19,10 @@ import sys
 from pathlib import Path
 
 # ---- Project information ------------------------------------------------------------
-
-project = "{{ cookiecutter.project_name }}"
-copyright = "{{ cookiecutter.__year }}, {{ cookiecutter.full_name }}"
-author = "{{ cookiecutter.full_name }}"
-version = release = importlib.metadata.version("{{ cookiecutter.__project_slug }}")
+project = "{{ project_name }}"
+copyright = "{% now 'utc', '%Y' %}, {{ full_name }}"
+author = "{{ full_name }}"
+version = release = importlib.metadata.version("{{ project_slug }}")
 
 # ---- Path configuration -------------------------------------------------------------
 
@@ -134,18 +133,18 @@ html_theme_options = {
     # },
     "icon_links": [
         {
-{%- if cookiecutter.platform == "github" %}
+{%- if platform == "github" %}
             "name": "GitHub",
             "icon": "fa-brands fa-square-github",
-{%- elif cookiecutter.platform == "gitlab" %}
+{%- elif platform == "gitlab" %}
             "name": "GitLab",
             "icon": "fa-brands fa-square-gitlab",
 {%- endif %}
-            "url": "{{ cookiecutter.url }}",
+            "url": "{{ url }}",
         },
         {
             "name": "PyPI",
-            "url": "https://pypi.org/project/{{ cookiecutter.project_name }}/",
+            "url": "https://pypi.org/project/{{ project_name }}/",
             "icon": "fa-solid fa-box",
         },
     ],

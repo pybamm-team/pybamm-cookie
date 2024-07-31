@@ -1,13 +1,13 @@
 """
-Copyright (c) {{ cookiecutter.__year }} {{ cookiecutter.full_name }}. All rights reserved.
+Copyright (c) {% now 'utc', '%Y' %} {{ full_name }}. All rights reserved.
 
-{{ cookiecutter.project_name }}: {{ cookiecutter.project_short_description }}
+{{ project_name }}: {{ project_short_description }}
 """
-{%- if cookiecutter.mypy %}
+{%- if mypy %}
 from __future__ import annotations
 {%- endif %}
 
-{%- if cookiecutter.vcs %}
+{%- if vcs %}
 from ._version import version as __version__
 {%- else %}
 __version__ = "0.1.0"
@@ -15,11 +15,15 @@ __version__ = "0.1.0"
 import pybamm
 from .entry_point import Model, parameter_sets, models
 {# keep this line here for newline #}
-{%- if cookiecutter.mypy %}
+{%- if mypy %}
 __all__: list[str] = [
 {%- else %}
 __all__ = [
 {%- endif %}
+<<<<<<< Updated upstream:{{cookiecutter.project_name}}/src/{{cookiecutter.__project_slug}}/__init__.py
+=======
+{%- if vcs %}
+>>>>>>> Stashed changes:template/src/{{project_slug}}/__init__.py.jinja
     "__version__",
     "pybamm",
     "parameter_sets",

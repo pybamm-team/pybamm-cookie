@@ -1,0 +1,92 @@
+project_name:
+  type: str
+  default: "pybamm-example-project"
+  help: "The name of your project"
+
+project_slug:
+  type: str
+  help: Your Python package name (should be in `snake_case`)
+  default: "{{ project_name|lower|replace('-', '_')|replace(' ', '_') }}"
+  validator: |
+    {% if ('-' in project_slug or ' ' in project_slug) %}
+    Package name should not contain empty spaces or hyphens
+    {% endif %}
+
+platform:
+  type: str
+  choices:
+    - github
+    - gitlab
+  default: github
+  help: "The platform you are using to host your project"
+
+org:
+  type: str
+  default: "pybamm-team"
+  help: "The name of your organisation (or username, if you are not part of an organisation)"
+
+url:
+  type: str
+  default: "https://{{ platform }}.com/{{ org }}/{{ project_name }}"
+  help: "The Origin URL to your repository"
+
+branch:
+  type: str
+  default: "main"
+  help: "The default branch of your repository"
+
+full_name:
+  type: str
+  default: "John Doe"
+  help: "Your name"
+
+email:
+  type: str
+  default: "john@doe.com"
+  help: "Your email"
+
+project_short_description:
+  type: str
+  default: "A template for creating battery modeling projects based on PyBaMM"
+  help: "A short description of your project"
+
+license:
+  type: str
+  choices:
+    - BSD
+    - Apache
+    - MIT
+  default: BSD
+  help: "Select a license"
+
+backend:
+  type: str
+  choices:
+    - hatch
+  default: hatch
+  help: "Choose a build backend"
+
+vcs:
+  type: bool
+  default: false
+  help: "Let hatch get the version from your version control system (Git/Mercurial/SVN)?"
+
+mypy:
+  type: bool
+  default: false
+  help: "Use mypy and static types"
+
+
+_copy_without_render:
+  type: list
+  default: ["*.yml"]
+
+_jinja_extensions:
+    - jinja2_time.TimeExtension
+
+_subdirectory: template
+
+_tasks:
+  - git init -b {{branch}}
+  - git config user.name {{full_name}}
+  - git config user.email {{email}}
