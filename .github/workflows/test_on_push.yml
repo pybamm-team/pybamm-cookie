@@ -133,5 +133,4 @@ jobs:
 
         - name: Test the generated project
           working-directory: ./pybamm-example-project
-          run: |
-            nox -s generated-project-tests
+          run: nox -s generated-project-tests
