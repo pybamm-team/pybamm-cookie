@@ -18,9 +18,11 @@
     "backend": [
         "hatch"
     ],
+    "vcs": false,
     "mypy": false,
     "__year": "{% now 'utc', '%Y' %}",
     "__project_slug": "{{ cookiecutter.project_name | lower | replace('-', '_') | replace('.', '_') }}",
+    "_copy_without_render": ["*.yml"],
     "__type": "{{ 'pure' }}",
     "__answers": "",
     "__ci": "{{ cookiecutter.platform }}",
@@ -40,7 +42,8 @@
         "license": "Select a license",
         "backend": {
             "__prompt__": "Choose a build backend",
-            "hatch": "Hatchling (recommended for pure Python projects)"
+            "hatch": "Hatchling (recommended for pure Python projects)",
+              "vcs": "Obtain the version from your version control system (Git/Mercurial/SVN)?"
         },
         "mypy": "Use mypy and static types"
     }
