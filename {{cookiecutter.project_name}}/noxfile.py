@@ -47,7 +47,7 @@ def run_generated_project_tests(session):
 
 @nox.session(name="user-tests")
 def run_user_tests(session):
-    """Run the tests for testing user written tests"""
+    """Run user written tests"""
     session.install("setuptools", silent=False)
     session.install("-e", ".[dev]", silent=False)
     session.run("pytest", "tests/user_tests")
