@@ -36,22 +36,21 @@ def build_docs(session: nox.Session) -> None:
                 "build/html/",
             )
 
+def install_and_run_tests(session, test_dir):
+    """Install dependencies and run tests in the specified directory."""
+    session.install("setuptools", silent=False)
+    session.install("-e", ".[dev]", silent=False)
+    session.run("pytest", test_dir)
 
 @nox.session(name="generated-project-tests")
 def run_generated_project_tests(session):
     """Run the tests for testing units inside generated project"""
-    session.install("setuptools", silent=False)
-    session.install("-e", ".[dev]", silent=False)
-    session.run("pytest", "tests/generated_project_tests")
-
+    install_and_run_tests(session, "tests/generated_project_tests")
 
 @nox.session(name="user-tests")
 def run_user_tests(session):
     """Run user written tests"""
-    session.install("setuptools", silent=False)
-    session.install("-e", ".[dev]", silent=False)
-    session.run("pytest", "tests/user_tests")
-
+    install_and_run_tests(session, "tests/user_tests")
 
 @nox.session(name="coverage")
 def run_coverage(session):
