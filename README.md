@@ -31,9 +31,11 @@ This repository contains a `copier` template for battery modeling projects using
 
 ## 📄 Using `pybamm-cookiecutter`
 
-### Generating projects with `pybamm-cookiecutter` manually using copier
+### Generating projects with `pybamm-cookiecutter`
 
-This template is not on PyPI yet, so it cannot be installed through `pip` until the first release. Meanwhile, it can be used by cloning this repository and using `copier` to generate a project with this template.
+#### Manually using copier
+
+This template is not on PyPI yet, so it cannot be installed through `pipx` until the first release. Meanwhile, it can be used by cloning this repository and using `copier` to generate a project with this template.
 
 Install `copier` and `jinja2_time` extension using `pip`.
 ```bash
@@ -43,7 +45,30 @@ Generate a project from the `pybamm-cookiecutter` template.
 **Note:** This requires an internet connection. You could manually clone the git repository and run the copy command, or just execute the copy command with the URL to the git repository.
 
 ```bash
-copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git name_of_your_project/ --trust
+copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git . --trust
+# this will generate the project in the current working directory
+copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git path_to_copy_to/ --trust
+# this will generate the project in the specified path
+```
+#### Using pipx
+
+Clone the `pybamm-cookiecutter` github repository.
+```bash
+git clone https://github.com/pybamm-team/pybamm-cookiecutter.git
+```
+Navigate into the `pybamm-cookiecutter` and use `pipx` to access the `CLI`.
+```bash
+cd pybamm-cookiecutter
+pipx install .
+```
+Once `pipx` installs the package locally, you can execute it to generate a project.
+```bash
+pybamm_cookiectter
+# this will prompt the user for project configuration and generate
+# the project in the current working directory.
+# or
+pybamm_cookiecutter --path /path_to_copy_to
+# this will install the project in the specified path.
 ```
 
 Copier will prompt you with various configurations and you may choose the ones that suit your use case.
