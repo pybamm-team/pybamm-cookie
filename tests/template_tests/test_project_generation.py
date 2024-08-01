@@ -1,37 +1,38 @@
 import pybamm_cookiecutter as m
 import pytest
-from pytest_cookies.plugin import Cookies
 
 def test_version() -> None:
     assert m.__version__
 
-def test_bake_project(cookies: Cookies):
+
+def test_bake_project(copie): # codespell:ignore copie
     """
     Testing the template generation with default values
     """
-    result = cookies.bake()
+    result = copie.copy() # codespell:ignore copie
+
     assert result.exit_code == 0, f"Exited with code {result.exit_code}, expected 0"
     assert result.exception is None, result.exception
-    assert result.project_path.name == "pybamm-example-project"
-    assert result.project_path.is_dir(), f"Project directory {result.project_path} not found"
+    assert result.project_dir.is_dir(), f"Project directory {result.project_path} not found"
+    with open(result.project_dir / "README.md") as f:
+       assert f.readline() == "# pybamm-example-project\n", f"{f.readline()} is not the same as # pybamm-example-project\n"
 
 
-def test_bake_custom_project(cookies: Cookies):
+def test_template_with_extra_answers(copie): # codespell:ignore copie
     """
     Testing the template generation with custom template and checking if the projects exists in the tmp_path
     """
-    result = cookies.bake(extra_context={
-        "author_full_name": "pybamm_user",
-        "author_email": "pybamm@pybamm.org",
-        "project_name": "pybamm_cookie",
-        "project_slug": "example",
+    extra_context = {
+        "project_name": "test-bake-project",
+        "email": "pybamm@pybamm.org",
+        "project_slug": "pybamm_cookie",
         "project_short_description": "This is an example pybamm cookiecutter template",
-        "project_url": "pybamm.org",
-        "project_version": "0.1.0",
-        "documentation_engine": "sphinx(rst)",
-    })
+        "url": "pybamm.org",
+    }
+    result = copie.copy(extra_answers=extra_context) # codespell:ignore copie
 
     assert result.exit_code == 0, f"Exited with code {result.exit_code}, expected 0"
     assert result.exception is None, result.exception
-    assert result.project_path.name == "pybamm_cookie"
-    assert result.project_path.is_dir(), f"Project directory {result.project_path} not found"
+    assert result.project_dir.is_dir(), f"Project directory {result.project_path} not found"
+    with open(result.project_dir / "README.md") as f:
+        assert f.readline() == f"# {extra_context['project_name']}\n", f"{f.readline()} is not the same as {extra_context['project_name']}\n"

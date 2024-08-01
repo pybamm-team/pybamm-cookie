@@ -1,8 +1,8 @@
 [build-system]
-{%- if cookiecutter.backend == "hatch" %}
+{%- if backend == "hatch" %}
 requires = [
   "hatchling",
-{%- if cookiecutter.vcs == true %}
+{%- if backend == "hatch" and vcs == true %}
   "hatch-vcs",
 {%- endif %}
 ]
@@ -10,27 +10,27 @@ build-backend = "hatchling.build"
 {%- endif %}
 
 [project]
-name = "{{ cookiecutter.project_name }}"
+name = "{{ project_name }}"
 authors = [
-  { name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" },
+  { name = "{{ full_name }}", email = "{{ email }}" },
 ]
-{%- if cookiecutter.org | lower == "pybamm-team" %}
+{%- if org | lower == "pybamm-team" %}
 maintainers = [
-  { name = "PyBaMM Team", email = "pybamm@pybamm.org" },
+  { name = "The PyBaMM Team", email = "pybamm@pybamm.org" },
 ]
 {%- endif %}
-description = "{{ cookiecutter.project_short_description }}"
+description = "{{ project_short_description }}"
 readme = "README.md"
-requires-python = ">=3.8"  # PyBaMM supports 3.8 and above
+requires-python = ">=3.8"
 classifiers = [
   "Development Status :: 1 - Planning",
   "Intended Audience :: Science/Research",
   "Intended Audience :: Developers",
-{%- if cookiecutter.license == "BSD" %}
+{%- if license == "BSD-3-Clause" %}
   "License :: OSI Approved :: BSD License",
-{%- elif cookiecutter.license == "Apache" %}
+{%- elif license == "Apache" %}
   "License :: OSI Approved :: Apache Software License",
-{%- elif cookiecutter.license == "MIT" %}
+{%- elif license == "MIT" %}
   "License :: OSI Approved :: MIT License",
 {%- endif %}
   "Operating System :: OS Independent",
@@ -40,13 +40,13 @@ classifiers = [
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",  # PyBaMM supports >=3.8,<3.12
+  "Programming Language :: Python :: 3.11",
   "Topic :: Scientific/Engineering",
-{%- if cookiecutter.mypy %}
+{%- if mypy %}
   "Typing :: Typed",
 {%- endif %}
 ]
-{%- if cookiecutter.backend == "hatch" %}
+{%- if backend == "hatch" %}
 dynamic = ["version"]
 {%- endif %}
 dependencies = ["pybamm",]
@@ -74,36 +74,39 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "{{ cookiecutter.url }}"
-"Bug Tracker" = "{{ cookiecutter.url }}/issues"
-Discussions = "{{ cookiecutter.url }}/discussions"
-Changelog = "{{ cookiecutter.url }}/releases"
+Homepage = "{{ url }}"
+"Bug Tracker" = "{{ url }}/issues"
+Discussions = "{{ url }}/discussions"
+Changelog = "{{ url }}/releases"
 
 [project.entry-points."parameter_sets"]
-Chen2020 = "{{ cookiecutter.__project_slug }}.parameters.input.Chen2020:get_parameter_values"
+Chen2020 = "{{ project_slug }}.parameters.input.Chen2020:get_parameter_values"
 
 [project.entry-points."models"]
-SPM = "{{ cookiecutter.__project_slug }}.models.input.spm:SPM"
-BasicReservoir = "{{ cookiecutter.__project_slug }}.models.input.basic_reservoir:BasicReservoir"
+SPM = "{{ project_slug }}.models.input.SPM:SPM"
+BasicReservoir = "{{ project_slug }}.models.input.BasicReservoir:BasicReservoir"
 
 {# keep this line here for newline #}
-{%- if cookiecutter.backend == "hatch" %}
+{%- if backend == "hatch" %}
 [tool.hatch]
-{%- if cookiecutter.vcs == true %}
+{%- if backend == "hatch" and vcs == true %}
 version.source = "vcs"
-build.hooks.vcs.version-file = "src/{{ cookiecutter.__project_slug }}/_version.py"
+build.hooks.vcs.version-file = "src/{{ project_slug }}/_version.py"
 {%- endif %}
 envs.default.dependencies = [
   "pybamm",
 ]
 {%- endif %}
 
-{%- if cookiecutter.backend == "hatch" and cookiecutter.vcs == false %}
+{%- if backend == "hatch" and vcs == false %}
 [tool.hatch.version]
-path = "src/{{ cookiecutter.__project_slug }}/__init__.py"
+path = "src/{{ project_slug }}/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/{{ project_slug }}"]
 {%- endif %}
 {# keep this line here for newline #}
-{%- if cookiecutter.mypy %}
+{%- if mypy %}
 [tool.mypy]
 python_version = "3.11"
 strict =  false
@@ -122,7 +125,7 @@ disable_error_code = ["call-overload", "operator"]
 {%- endif %}
 
 [tool.coverage]
-run.source = ["{{ cookiecutter.__project_slug }}"]
+run.source = ["{{ project_slug }}"]
 port.exclude_lines = [
   'pragma: no cover',
 ]

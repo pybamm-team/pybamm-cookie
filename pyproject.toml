@@ -30,7 +30,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dynamic = ["version"]
-dependencies = ["pybamm", "cookiecutter"]
+dependencies = ["pybamm", "copier", "jinja2-time"]
 
 [project.optional-dependencies]
 dev = [
@@ -38,7 +38,7 @@ dev = [
   "pytest-cov >=3",
   "nox[uv]",
   "pre-commit",
-  "pytest-cookies",
+  "pytest-copie",
 ]
 docs = [
   "sphinx",
