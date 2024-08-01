@@ -16,12 +16,12 @@ authors = [
 ]
 {%- if org | lower == "pybamm-team" %}
 maintainers = [
-  { name = "PyBaMM Team", email = "pybamm@pybamm.org" },
+  { name = "The PyBaMM Team", email = "pybamm@pybamm.org" },
 ]
 {%- endif %}
 description = "{{ project_short_description }}"
 readme = "README.md"
-requires-python = ">=3.8"  # PyBaMM supports 3.8 and above
+requires-python = ">=3.8"
 classifiers = [
   "Development Status :: 1 - Planning",
   "Intended Audience :: Science/Research",
@@ -40,7 +40,7 @@ classifiers = [
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",  # PyBaMM supports >=3.9,<3.13
+  "Programming Language :: Python :: 3.11",
   "Topic :: Scientific/Engineering",
 {%- if mypy %}
   "Typing :: Typed",

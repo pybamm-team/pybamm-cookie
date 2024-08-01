@@ -5,11 +5,11 @@ project_name:
 
 project_slug:
   type: str
-  help: Your Python package name (should be in `snake_case`)
+  help: The name of the directory containing the Python files for your project. This should be in `snake_case`, and this is what you will import it with, such as `import pybamm_example_project`.
   default: "{{ project_name|lower|replace('-', '_')|replace(' ', '_') }}"
   validator: |
     {% if ('-' in project_slug or ' ' in project_slug) %}
-    Package name should not contain empty spaces or hyphens
+    The name of the directory should not contain spaces or hyphens
     {% endif %}
 
 platform:
@@ -28,7 +28,7 @@ org:
 url:
   type: str
   default: "https://{{ platform }}.com/{{ org }}/{{ project_name }}"
-  help: "The Origin URL to your repository"
+  help: "The origin URL to your code repository"
 
 branch:
   type: str
@@ -47,7 +47,7 @@ email:
 
 project_short_description:
   type: str
-  default: "A template for creating battery modeling projects based on PyBaMM"
+  default: "A battery modelling project that uses the PyBaMM framework"
   help: "A short description of your project"
 
 license:
@@ -64,7 +64,7 @@ backend:
   choices:
     - "hatch"
   default: "hatch"
-  help: "Choose a build backend. hatch (hatchling) recommended for pure python projects"
+  help: "Choose a build backend. hatch (hatchling) is recommended for pure Python projects"
 
 vcs:
   type: bool

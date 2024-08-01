@@ -118,7 +118,7 @@ jobs:
           with:
             python-version: ${{ matrix.python-version }}
 
-        - name: Install cookiecutter and generate a project
+        - name: Install copier and generate a project
           run: |
             python -m pip install copier jinja2_time
             copier copy . ./pybamm-example-project --trust --defaults
