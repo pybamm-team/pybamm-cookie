@@ -25,40 +25,35 @@
 
 <!-- SPHINX-START -->
 [![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
+[![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-red.json)](https://github.com/copier-org/copier)
 
-This repository contains a `cookiecutter` template for battery modeling projects using PyBaMM, released under the [BSD-3-Clause license](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE). Currently under active development.
+This repository contains a `copier` template for battery modeling projects using PyBaMM, released under the [BSD-3-Clause license](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE). Currently under active development.
 
 ## 📄 Using `pybamm-cookiecutter`
 
-### Generating projects with `pybamm-cookiecutter`
+### Generating projects with `pybamm-cookiecutter` manually using copier
 
-This template is not on PyPI yet, so it cannot be installed through `pip` until the first release. Meanwhile, it can be used by cloning this repository and using `cookiecutter` to generate a project with this template.
+This template is not on PyPI yet, so it cannot be installed through `pip` until the first release. Meanwhile, it can be used by cloning this repository and using `copier` to generate a project with this template.
 
-To use pybamm-cookiecutter template, first clone this repository on your local machine.
+Install `copier` and `jinja2_time` extension using pip.
 ```bash
-git clone https://github.com/pybamm-team/pybamm-cookiecutter.git
+pip install copier jinja2-time
 ```
-Create a temporary virtual environment inside the reposiory and activate it.
+Generate a project from the `pybamm-cookiecutter` template.
+**Note:** This requires an internet connect, you could manually clone the git repository and run the copy command, or just execute the copy command with the URL to the git repository.
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-Install cookiecutter and generate the project using the pybamm-cookiecutter template by moving outside the parent pybamm-cookiecutter directory.
-```bash
-pip install cookiecutter
-cookiecutter pybamm-cookiecutter/
+copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git name_of_your_project/ --trust
 ```
 
-Cookiecutter will prompt you with various configurations and you may choose the ones that suit your use case.
+Copier will prompt you with various configurations and you may choose the ones that suit your use case.
 
-**Note**: If you created a repository using this template within GitHub and cloned it locally, you can skip the next step.
+**Note**: A `git` repository is automatically initialised when a project is created within a directory.
 
-Once the project is generated through cookiecutter, initialise `git` by executing `git init` inside your project directory.
-
+After generation you could navigate to the generated project and run `nox -s generated-project-tests` to ensure if the project units are working as intended.
 
 ### Installing the `pybamm-cookiecutter` project
 
-This is our version of the project generated using the cookiecutter template. There are two ways to install this project, either through `nox` or `pip`. `nox` uses `uv pip` or `pip` internally, and in this case creates a virtual environment for you to activate.
+This refers to this project used for the development of this template. There are two ways to install this project, either through `nox` or `pip`. `nox` uses `uv pip` or `pip` internally, and in this case creates a virtual environment for you to activate.
 To install, navigate to the root directory of this repository and execute either of these commands:
 
 `nox -s dev`
@@ -70,7 +65,7 @@ To check if the project was successfully installed, import the project inside Py
 ```python
 import pybamm_cookiecutter
 
-pybamm_cookiecutter._version.version
+pybamm_cookiecutter.__version__
 ```
 
 ## 🛠️ Contributing to `pybamm-cookiecutter`
