@@ -12,6 +12,7 @@ def test_parameter_sets_entry_points():
     parameter_sets = Path("src/{{ project_slug }}/parameters/input/").glob("*.py")
     # Making a list of parameter sets in the parameters/input directory
     parameter_sets = [x.stem for x in parameter_sets].sort()
+    parameter_sets = [x.stem for x in parameter_sets].sort()
 
     assert parameter_sets == entry_points, "Entry points missing either in pyproject.toml or in the input directory"
 
@@ -34,6 +35,7 @@ def test_model_entry_points():
     entry_points = list({{ project_slug }}.models).sort()
     models = Path("src/{{ project_slug }}/models/input/").glob("*.py")
     # Making a list Parameter sets in the parameters/input directory
+    models = [x.stem for x in models].sort()
     models = [x.stem for x in models].sort()
 
     assert models == entry_points, "Entry points missing either in pyproject.toml or in the input directory"
