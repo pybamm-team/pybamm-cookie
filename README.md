@@ -35,12 +35,13 @@ This repository contains a `copier` template for battery modeling projects using
 
 This template is not on PyPI yet, so it cannot be installed through `pip` until the first release. Meanwhile, it can be used by cloning this repository and using `copier` to generate a project with this template.
 
-Install `copier` and `jinja2_time` extension using pip.
+Install `copier` and `jinja2_time` extension using `pip`.
 ```bash
 pip install copier jinja2-time
 ```
 Generate a project from the `pybamm-cookiecutter` template.
-**Note:** This requires an internet connect, you could manually clone the git repository and run the copy command, or just execute the copy command with the URL to the git repository.
+**Note:** This requires an internet connection. You could manually clone the git repository and run the copy command, or just execute the copy command with the URL to the git repository.
+
 ```bash
 copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git name_of_your_project/ --trust
 ```
@@ -49,11 +50,11 @@ Copier will prompt you with various configurations and you may choose the ones t
 
 **Note**: A `git` repository is automatically initialised when a project is created within a directory.
 
-After generation you could navigate to the generated project and run `nox -s generated-project-tests` to ensure if the project units are working as intended.
+After generation, you can navigate to the generated project and run `nox -s generated-project-tests` to ensure if the project units are working as intended.
 
 ### Installing the `pybamm-cookiecutter` project
 
-This refers to this project used for the development of this template. There are two ways to install this project, either through `nox` or `pip`. `nox` uses `uv pip` or `pip` internally, and in this case creates a virtual environment for you to activate.
+This refers to the project used for the development of this template. There are two ways to install this project: either through `nox` or `pip`. `nox` uses `uv pip` or `pip` internally, and in this case, creates a virtual environment for you to activate.
 To install, navigate to the root directory of this repository and execute either of these commands:
 
 `nox -s dev`
