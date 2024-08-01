@@ -40,28 +40,28 @@ from typing import Callable
 class EntryPoint(Mapping):
     """
     Dict-like interface for accessing parameter sets and models through entry points in cookiecutter template.
-    Access via :py:data:`pybamm_cookiecutter.parameter_sets` for parameter_sets
-    Access via :py:data:`pybamm_cookiecutter.Model` for Models
+    Access via :py:data:`{{project_slug}}.parameter_sets` for parameter_sets
+    Access via :py:data:`{{project_slug}}.Model` for Models
 
     Examples
     --------
     Listing available parameter sets:
-        >>> import pybamm_cookiecutter
-        >>> list(pybamm_cookiecutter.parameter_sets)
+        >>> import {{project_slug}}
+        >>> list({{project_slug}}.parameter_sets)
         ['Chen2020', ...]
-        >>> list(pybamm_cookiecutter.models)
+        >>> list({{project_slug}}.models)
         ['SPM', ...]
 
     Get the docstring for a parameter set/model:
 
 
-        >>> print(pybamm_cookiecutter.parameter_sets.get_docstring("Ai2020"))
+        >>> print({{project_slug}}.parameter_sets.get_docstring("Ai2020"))
         <BLANKLINE>
         Parameters for the Enertech cell (Ai2020), from the papers :footcite:t:`Ai2019`,
         :footcite:t:`rieger2016new` and references therein.
         ...
 
-        >>> print(pybamm_cookiecutter.models.get_docstring("SPM"))
+        >>> print({{project_slug}}.models.get_docstring("SPM"))
         <BLANKLINE>
         Single Particle Model (SPM) model of a lithium-ion battery, from :footcite:t:`Marquis2019`. This class differs from the :class:`pybamm.lithium_ion.SPM` model class in that it shows the whole model in a single class. This comes at the cost of flexibility in combining different physical effects, and in general the main SPM class should be used instead.
         ...
@@ -145,10 +145,10 @@ def Model(model:str):
     Examples
     --------
     Listing available models:
-        >>> import pybamm_cookiecutter
-        >>> list(pybamm_cookiecutter.models)
+        >>> import {{project_slug}}
+        >>> list({{project_slug}}.models)
         ['SPM', ...]
-        >>> pybamm_cookiecutter.Model('Author/Year')
-        <pybamm_cookiecutter.models.input.SPM.SPM object>
+        >>> {{project_slug}}.Model('Author/Year')
+        <{{project_slug}}.models.input.SPM.SPM object>
     """
     return models[model]

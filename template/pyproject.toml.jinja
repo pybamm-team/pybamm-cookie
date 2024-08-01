@@ -84,6 +84,7 @@ Chen2020 = "{{ project_slug }}.parameters.input.Chen2020:get_parameter_values"
 
 [project.entry-points."models"]
 SPM = "{{ project_slug }}.models.input.SPM:SPM"
+BasicReservoir = "{{ project_slug }}.models.input.BasicReservoir:BasicReservoir"
 
 {# keep this line here for newline #}
 {%- if backend == "hatch" %}
