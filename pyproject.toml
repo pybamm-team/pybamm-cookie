@@ -56,10 +56,10 @@ docs = [
 ]
 
 [project.scripts]
-pybamm_cookiecutter = "pybamm_cookiecutter.cli:pybamm_cookiecutter_cli"
+pybamm-cookiecutter = "pybamm_cookiecutter.cli:pybamm_cookiecutter_cli"
 
 [project.entry-points."pipx.run"]
-pybamm_cookiecutter = "pybamm_cookiecutter.cli:pybamm_cookiecutter_cli"
+pybamm-cookiecutter = "pybamm_cookiecutter.cli:pybamm_cookiecutter_cli"
 
 [project.urls]
 Homepage = "https://github.com/pybamm-team/pybamm-cookiecutter"
