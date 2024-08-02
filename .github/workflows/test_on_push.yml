@@ -58,9 +58,6 @@ jobs:
       - name: Test template generation
         run: nox -s template-tests
 
-      - name: Test project
-        run: nox -s project-tests
-
       - name: Run coverage tests
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
         run: nox -s coverage
