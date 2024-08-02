@@ -4,7 +4,7 @@ from pathlib import Path
 from colorama import Fore
 import os
 
-TEMPLATE = "https://github.com/pybamm-team/pybamm-cookiecutter.git"
+TEMPLATE = str(Path.cwd())
 
 def pybamm_cookiecutter_cli():
     """

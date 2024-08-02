@@ -35,8 +35,6 @@ This repository contains a `copier` template for battery modeling projects using
 
 #### Manually using copier
 
-This template is not on PyPI yet, so it cannot be installed through `pipx` until the first release. Meanwhile, it can be used by cloning this repository and using `copier` to generate a project with this template.
-
 Install `copier` and `jinja2_time` extension using `pip`.
 ```bash
 pip install copier jinja2-time
