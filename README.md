@@ -42,7 +42,6 @@ Install `copier` and `jinja2_time` extension using `pip`.
 pip install copier jinja2-time
 ```
 Generate a project from the `pybamm-cookiecutter` template.
-**Note:** This requires an internet connection. You could manually clone the git repository and run the copy command, or just execute the copy command with the URL to the git repository.
 
 ```bash
 copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git . --trust
@@ -52,23 +51,13 @@ copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git path_to_copy_
 ```
 #### Using pipx
 
-Clone the `pybamm-cookiecutter` github repository.
+Install the `pybamm-cookiecutter` package.
 ```bash
-git clone https://github.com/pybamm-team/pybamm-cookiecutter.git
+pipx install pybamm-cookiecutter
 ```
-Navigate into the `pybamm-cookiecutter` and use `pipx` to access the `CLI`.
+Navigate into the directory you want your project directory to reside in, or use `--path` argument to explicitly mention the path where you want your project to be generated.
 ```bash
-cd pybamm-cookiecutter
-pipx install .
-```
-Once `pipx` installs the package locally, you can execute it to generate a project.
-```bash
-pybamm_cookiectter
-# this will prompt the user for project configuration and generate
-# the project in the current working directory.
-# or
-pybamm_cookiecutter --path /path_to_copy_to
-# this will install the project in the specified path.
+pybamm-cookiecutter --path /path_to_copy_to
 ```
 
 Copier will prompt you with various configurations and you may choose the ones that suit your use case.
