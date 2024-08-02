@@ -30,7 +30,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dynamic = ["version"]
-dependencies = ["copier", "jinja2-time"]
+dependencies = ["copier", "jinja2-time", "colorama"]
 
 [project.optional-dependencies]
 dev = [
