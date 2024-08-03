@@ -118,10 +118,18 @@ jobs:
           with:
             python-version: ${{ matrix.python-version }}
 
-        - name: Install copier and generate a project
+        - name: Install copier and jinja2_time
+          run: python -m pip install copier jinja2_time
+
+        - name: Generate projects with different build backends and vcs
           run: |
-            python -m pip install copier jinja2_time
-            copier copy . ./pybamm-example-project --trust --defaults
+            copier copy . ../pybamm-example-project --trust --defaults
+
+            copier copy . ../pybamm-with-setuptools --data project_name=pybamm-with-setuptools --data project_slug=pybamm_with_setuptools --data backend=setuptools --trust --defaults
+
+            copier copy . ../pybamm-with-setuptools-scm --data project_name=pybamm-with-setuptools-scm --data project_slug=pybamm_with_setuptools_scm --data backend=setuptools --data vcs=true --trust --defaults
+
+            copier copy . ../pybamm-with-hatch-vcs --data project_name=pybamm-with-hatch-vcs --data project_slug=pybamm_with_hatch_vcs --data backend=hatch --data vcs=true --trust --defaults
 
         - name: Set up uv
           uses: yezz123/setup-uv@v4
@@ -131,6 +139,18 @@ jobs:
         - name: Install nox
           uses: wntrblm/nox@2024.04.15
 
-        - name: Test the generated project
-          working-directory: ./pybamm-example-project
+        - name: Test the generated project with default hatch build backend and no vcs
+          working-directory: ../pybamm-example-project
+          run: nox -s generated-project-tests
+
+        - name: Test the generated project with setuptools build backend and no scm
+          working-directory: ../pybamm-with-setuptools
+          run: nox -s generated-project-tests
+
+        - name: Test the generated project with setuptools build backend and scm
+          working-directory: ../pybamm-with-setuptools-scm
+          run: nox -s generated-project-tests
+
+        - name: Test the generated project with hatch build backend and vcs
+          working-directory: ../pybamm-with-hatch-vcs
           run: nox -s generated-project-tests
