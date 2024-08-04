@@ -65,12 +65,12 @@ backend:
     - "hatch"
     - "setuptools"
   default: "hatch"
-  help: "Choose a build backend. hatch (hatchling) is recommended for pure Python projects"
+  help: "Choose a build backend. hatch (hatchling) is recommended for pure Python projects and for beginners, while setuptools offers more classic yet modern configuration choices"
 
 vcs:
   type: bool
   default: false
-  help: "Let hatch/setuptools get the version from your version control system (Git/Mercurial/SVN) using the hatch-vcs/setuptools-scm plugin?"
+  help: "Let the build backend get the version from your version control system (Git/Mercurial/SVN) using the hatch-vcs (for hatchling) or the setuptools-scm (for setuptools) plugins?"
 
 mypy:
   type: bool
