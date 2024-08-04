@@ -88,5 +88,5 @@ _subdirectory: template
 
 _tasks:
   - git init -b {{branch}}
-  - git config user.name {{full_name}}
-  - git config user.email {{email}}
+  - git config user.name "{{full_name}}"
+  - git config user.email "{{email}}"
