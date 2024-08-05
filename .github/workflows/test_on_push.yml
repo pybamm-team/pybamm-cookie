@@ -166,4 +166,7 @@ jobs:
 
       - name: Check if the documentation can be built
         working-directory: ../pybamm-example-project
-        run: nox -s docs
+        run: |
+          git add .
+          git commit -am "initial commit"
+          nox -s docs
