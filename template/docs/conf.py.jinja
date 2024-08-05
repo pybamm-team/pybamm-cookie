@@ -58,6 +58,13 @@ html_last_updated_fmt = "%Y-%m-%d"
 html_static_path = ["_static"]
 html_file_suffix = ".html"
 
+# For edit button
+html_context = {
+    "github_user": "{{org}}",
+    "github_repo": "{{project_name}}",
+    "github_version": "{{branch}}",
+    "doc_path": "docs/",
+}
 # Add any logos and favicons for your hosted documentation here. The logo and the favicon
 # should be placed in the html_static_path directory listed above.
 # html_logo = "_static/logo.png"
