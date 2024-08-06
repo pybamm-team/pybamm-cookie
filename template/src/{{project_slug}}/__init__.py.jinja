@@ -8,10 +8,14 @@ from __future__ import annotations
 {%- endif %}
 
 {%- if vcs %}
-from ._version import version as __version__
+from importlib.metadata import version
+
+__version__ = version("{{project_name}}")
+
 {%- else %}
 __version__ = "0.1.0"
 {%- endif %}
+
 import pybamm
 from .entry_point import Model, parameter_sets, models
 {# keep this line here for newline #}
