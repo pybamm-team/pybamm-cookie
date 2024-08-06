@@ -19,8 +19,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "{{ project_name }}"
-{%- if backend == "setuptools" %}
+{%- if backend == "setuptools" and vcs == false %}
 version = "v0.1.0"
+{%- elif backend == "setuptools" and vcs == true %}
+dynamic = ["version"]
 {%- endif %}
 authors = [
   { name = "{{ full_name }}", email = "{{ email }}" },
