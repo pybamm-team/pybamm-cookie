@@ -8,12 +8,12 @@ from __future__ import annotations
 {%- endif %}
 
 {%- if vcs %}
-from ._version import version as __version__
+from {{project_slug}}._version import version as __version__
 {%- else %}
 __version__ = "0.1.0"
 {%- endif %}
 import pybamm
-from .entry_point import Model, parameter_sets, models
+from {{project_slug}}.entry_point import Model, parameter_sets, models
 {# keep this line here for newline #}
 {%- if mypy %}
 __all__: list[str] = [

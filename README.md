@@ -49,7 +49,12 @@ copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git path_to_copy_
 ```
 #### Using pipx (recommended)
 
-Install the `pybamm-cookiecutter` package.
+You can generate a project by executing the `pipx run` command which doesn't need any package installations.
+```bash
+pipx run pybamm-cookiecutter --path /path_to_copy_to
+```
+
+Or if you wish to install the `pybamm-cookiecutter` package and then generate a project, you could do so with the help of following commands.
 ```bash
 pipx install pybamm-cookiecutter
 ```
