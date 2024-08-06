@@ -134,3 +134,39 @@ jobs:
         - name: Test the generated project
           working-directory: ./pybamm-example-project
           run: nox -s generated-project-tests
+
+  run_generated_project_doctests:
+    needs: [template_test]
+    runs-on: ubuntu-latest
+    name: Generated Project Doctests (ubuntu-latest / Python 3.12)
+
+    steps:
+      - name: Check out pybamm-cookiecutter repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Set up uv
+        uses: yezz123/setup-uv@v4
+        with:
+          uv-venv: ".venv"
+
+      - name: Install nox
+        uses: wntrblm/nox@2024.04.15
+
+      - name: Install copier and jinja2_time and generate a template with default values
+        run: |
+          uv pip install copier jinja2-time
+          copier copy . ../pybamm-example-project --trust --defaults
+
+      - name: Check if the documentation can be built
+        working-directory: ../pybamm-example-project
+        run: |
+          git add .
+          git commit -am "initial commit"
+          nox -s docs
