@@ -35,7 +35,7 @@ repos:
   # Python files
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.5.5
+    rev: v0.5.6
     hooks:
       - id: ruff
         files: "^(src/pybamm_cookiecutter|tests$)"
@@ -59,7 +59,7 @@ repos:
   # mypy
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.11.0
+    rev: v1.11.1
     hooks:
       - id: mypy
         files: "^(src/pybamm_cookiecutter|tests$)"
