@@ -24,7 +24,7 @@ def pybamm_cookiecutter_cli():
     try:
         parser = argparse.ArgumentParser(description = "A copier template generator for PyBaMM based projects")
         parser.add_argument("--path", type = str, required = False, default = os.getcwd(),
-                            help = "The destination path for project generation")
+                            help = "The destination path for project generation. The default is the current working directory")
 
         args = parser.parse_args()
         destination_path = Path(args.path)

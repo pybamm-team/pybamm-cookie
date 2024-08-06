@@ -47,7 +47,7 @@ copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git . --trust
 copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git path_to_copy_to/ --trust
 # this will generate the project in the specified path
 ```
-#### Using pipx
+#### Using pipx (recommended)
 
 Install the `pybamm-cookiecutter` package.
 ```bash
