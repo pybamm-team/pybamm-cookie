@@ -1,16 +1,29 @@
 [build-system]
-{%- if backend == "hatch" %}
 requires = [
+{%- if backend == "hatch" %}
   "hatchling",
+{%- elif backend == "setuptools" %}
+  "setuptools",
+{%- endif %}
 {%- if backend == "hatch" and vcs == true %}
   "hatch-vcs",
+{%- elif backend == "setuptools" and vcs == true %}
+  "setuptools_scm[toml]>=8.1.0",
 {%- endif %}
 ]
+{%- if backend == "hatch" %}
 build-backend = "hatchling.build"
+{%- elif backend == "setuptools" %}
+build-backend = "setuptools.build_meta"
 {%- endif %}
 
 [project]
 name = "{{ project_name }}"
+{%- if backend == "setuptools" and vcs == false %}
+version = "0.0.1"
+{%- elif backend == "setuptools" and vcs == true %}
+dynamic = ["version"]
+{%- endif %}
 authors = [
   { name = "{{ full_name }}", email = "{{ email }}" },
 ]
@@ -85,7 +98,6 @@ Chen2020 = "{{ project_slug }}.parameters.input.Chen2020:get_parameter_values"
 [project.entry-points."models"]
 SPM = "{{ project_slug }}.models.input.SPM:SPM"
 BasicReservoir = "{{ project_slug }}.models.input.BasicReservoir:BasicReservoir"
-
 {# keep this line here for newline #}
 {%- if backend == "hatch" %}
 [tool.hatch]
@@ -106,6 +118,11 @@ path = "src/{{ project_slug }}/__init__.py"
 packages = ["src/{{ project_slug }}"]
 {%- endif %}
 {# keep this line here for newline #}
+{%- if backend == "setuptools" and vcs == true %}
+[tool.setuptools_scm]
+version_file = "src/{{ project_slug }}/_version.py"
+{%- endif %}
+
 {%- if mypy %}
 [tool.mypy]
 python_version = "3.11"
