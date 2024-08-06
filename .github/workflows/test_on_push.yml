@@ -159,10 +159,10 @@ jobs:
       - name: Install copier and jinja2_time and generate a template with default values
         run: |
           uv pip install copier jinja2-time
-          copier copy . ../pybamm-example-project --trust --defaults
+          copier copy . . --trust --defaults
 
       - name: Check if the documentation can be built
-        working-directory: ../pybamm-example-project
+        working-directory: ./pybamm-example-project
         run: |
           git add .
           git commit -am "initial commit"
