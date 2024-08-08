@@ -56,7 +56,7 @@ pipx run pybamm-cookiecutter --path /path_to_copy_to
 
 Or if you wish to install the `pybamm-cookiecutter` package and then generate a project, you could do so with the help of following commands.
 ```bash
-pipx install pybamm-cookiecutter
+pipx install pybamm-cookiecutter  # or pip install pybamm-cookiecutter
 ```
 Navigate into the directory you want your project directory to reside in, or use `--path` argument to explicitly mention the path where you want your project to be generated.
 ```bash
