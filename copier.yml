@@ -87,6 +87,9 @@ _jinja_extensions:
 
 _subdirectory: template
 
+_exclude:
+  - copier.yml
+
 _tasks:
   - command: git init -b {{branch}}
     working_directory: "{{project_name}}"

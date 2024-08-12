@@ -74,6 +74,10 @@ envs.default.dependencies = [
   "pybamm",
 ]
 
+[tool.hatch.build.targets.wheel]
+only-include = ["src/pybamm_cookiecutter", "/template", "copier.yml"]
+sources = ["src"]
+
 [tool.mypy]
 packages = [
   "src/pybamm_cookiecutter",

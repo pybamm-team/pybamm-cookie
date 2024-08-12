@@ -4,7 +4,8 @@ from pathlib import Path
 from colorama import Fore
 import os
 
-TEMPLATE = str(Path.cwd())
+project_root = Path(__file__).resolve().parent.parent
+TEMPLATE = str(project_root)
 
 def pybamm_cookiecutter_cli():
     """
@@ -31,6 +32,8 @@ def pybamm_cookiecutter_cli():
 
         copier.run_copy(src_path = TEMPLATE, dst_path = destination_path, unsafe=True)
 
+    except KeyboardInterrupt:
+        print("Execution stopped by the user")
     except Exception as error:
         print(Fore.RED + "Error caused by an exception: " + Fore.RESET, error)
         print(Fore.CYAN + "If you are unsure what the error is, feel free to open an issue at" + Fore.YELLOW +" - https://github.com/pybamm-team/pybamm-cookiecutter/issues" + Fore.RESET)
