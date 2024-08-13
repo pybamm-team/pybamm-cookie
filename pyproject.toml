@@ -6,6 +6,7 @@ build-backend = "hatchling.build"
 name = "pybamm-cookiecutter"
 authors = [
   { name = "Agriya Khetarpal", email = "agriyakhetarpal@outlook.com" },
+  { name = "Santhosh Sundaram", email = "santhoshsundaram9650@gmail.com" },
 ]
 maintainers = [
   { name = "PyBaMM Team", email = "pybamm@pybamm.org" },
