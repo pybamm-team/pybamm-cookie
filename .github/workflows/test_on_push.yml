@@ -128,7 +128,7 @@ jobs:
           uv-venv: ".venv"
 
       - name: Install copier and jinja2_time
-        run: uv pip install copier jinja2_time
+        run: uv pip install copier jinja2-time
 
       - name: Generate project
         run: |
