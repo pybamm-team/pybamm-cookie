@@ -39,7 +39,6 @@ def install_and_run_tests(session, test_dir):
     """Install dependencies and run tests in the specified directory."""
     session.install("setuptools", silent=False)
     session.install("-e", ".[dev]", silent=False)
-    session.run("pipx", "install", ".", "--force", silent=False)
     session.run("pytest", test_dir)
 
 @nox.session(name="template-tests")

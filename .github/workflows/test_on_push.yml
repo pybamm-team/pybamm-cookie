@@ -47,11 +47,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Set up Git
-        run: |
-          git config --global user.name "pybamm user"
-          git config --global user.email "pybammuser@pybamm.org"
-
       - name: Set up uv
         uses: yezz123/setup-uv@v4
         with:
@@ -59,6 +54,11 @@ jobs:
 
       - name: Install nox
         run: uv pip install nox[uv]
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "pybamm user"
+          git config --global user.email "pybammuser@pybamm.org"
 
       - name: Test template generation
         run: nox -s template-tests
