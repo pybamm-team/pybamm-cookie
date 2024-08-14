@@ -26,6 +26,7 @@
 <!-- SPHINX-START -->
 [![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
 [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-red.json)](https://github.com/copier-org/copier)
+[![Test template and generated project](https://github.com/pybamm-team/pybamm-cookie/actions/workflows/test_on_push.yml/badge.svg)](https://github.com/pybamm-team/pybamm-cookie/actions/workflows/test_on_push.yml)
 
 This repository contains a `copier` template for battery modeling projects using PyBaMM, released under the [BSD-3-Clause license](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE). Currently under active development.
 
