@@ -1,4 +1,4 @@
-# pybamm-cookiecutter
+# pybamm-cookie
 
 ```{toctree}
 :maxdepth: 2

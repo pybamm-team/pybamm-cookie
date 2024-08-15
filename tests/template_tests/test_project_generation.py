@@ -1,4 +1,4 @@
-import pybamm_cookiecutter as m
+import pybamm_cookie as m
 import pytest
 import os
 import subprocess
@@ -29,7 +29,7 @@ def test_template_with_extra_answers(copie): # codespell:ignore copie
         "project_name": "test-bake-project",
         "email": "pybamm@pybamm.org",
         "project_slug": "pybamm_cookie",
-        "project_short_description": "This is an example pybamm cookiecutter template",
+        "project_short_description": "This is an example pybamm-cookie template",
         "url": "pybamm.org",
     }
     result = copie.copy(extra_answers=extra_context) # codespell:ignore copie
@@ -45,6 +45,6 @@ def test_cli():
     Testing if the CLI works and returns a successful exit code on execution
     """
     os.mkdir("testcli")
-    return_code = subprocess.run(["pybamm-cookiecutter", "--defaults"], cwd = "./testcli")
+    return_code = subprocess.run(["pybamm-cookie", "--defaults"], cwd = "./testcli")
     shutil.rmtree("testcli")
     assert return_code

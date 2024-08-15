@@ -62,7 +62,7 @@ def run_coverage(session):
 
 @nox.session(name="dev")
 def set_dev(session):
-    """Install pybamm-cookiecutter in editable mode"""
+    """Install pybamm-cookie in editable mode"""
     session.install("virtualenv")
     session.run("virtualenv", os.fsdecode(VENV_DIR), silent=True)
     python = os.fsdecode(VENV_DIR.joinpath("bin/python"))

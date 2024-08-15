@@ -1,7 +1,7 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE-OF-CONDUCT.md)
 
 
-# `pybamm-cookiecutter` Code of Conduct
+# `pybamm-cookie` Code of Conduct
 
 ## Our Pledge
 

@@ -128,7 +128,7 @@ cython_debug/
 .vscode/
 
 # hatch-vcs
-src/pybamm_cookiecutter/_version.py
+src/pybamm_cookie/_version.py
 
 # ruff
 .ruff_cache/
