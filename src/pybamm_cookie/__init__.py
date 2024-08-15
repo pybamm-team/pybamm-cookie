@@ -1,5 +1,5 @@
 """
-Copyright (c) 2023 The PyBaMM Team. All rights reserved.
+Copyright (c) 2024 The PyBaMM Team. All rights reserved.
 
 pybamm-cookie: A template for creating battery modeling projects based on PyBaMM
 """
