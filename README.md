@@ -100,4 +100,8 @@ For any questions, comments, suggestions or bug reports, please see the
 
 The `pybamm-cookiecutter` project is open source code. For more information about its license, see [LICENSE](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE).
 
+## ✨ Credits
+This project is highly inspired by these two projects -
+- [SciCookie](https://github.com/osl-incubator/scicookie), a cookiecutter template developed by [Open Science Labs](https://opensciencelabs.org/) to provide a boilerplate to generate Python based projects with a hassle free experience.
+- [scientific-python/cookie](https://github.com/scientific-python/cookie), a project that supports copier/cookiecutter/cruft template generation for new Python projects based on Scientific Python developer guide.
 <!-- SPHINX-END -->
