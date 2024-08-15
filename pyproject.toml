@@ -3,7 +3,7 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pybamm-cookiecutter"
+name = "pybamm-cookie"
 authors = [
   { name = "Agriya Khetarpal", email = "agriyakhetarpal@outlook.com" },
   { name = "Santhosh Sundaram", email = "santhoshsundaram9650@gmail.com" },
@@ -57,31 +57,31 @@ docs = [
 ]
 
 [project.scripts]
-pybamm-cookiecutter = "pybamm_cookiecutter.cli:pybamm_cookiecutter_cli"
+pybamm-cookie = "pybamm_cookie.cli:pybamm_cookie_cli"
 
 [project.entry-points."pipx.run"]
-pybamm-cookiecutter = "pybamm_cookiecutter.cli:pybamm_cookiecutter_cli"
+pybamm-cookie = "pybamm_cookie.cli:pybamm_cookie_cli"
 
 [project.urls]
-Homepage = "https://github.com/pybamm-team/pybamm-cookiecutter"
-"Bug Tracker" = "https://github.com/pybamm-team/pybamm-cookiecutter/issues"
-Discussions = "https://github.com/pybamm-team/pybamm-cookiecutter/discussions"
-Changelog = "https://github.com/pybamm-team/pybamm-cookiecutter/releases"
+Homepage = "https://github.com/pybamm-team/pybamm-cookie"
+"Bug Tracker" = "https://github.com/pybamm-team/pybamm-cookie/issues"
+Discussions = "https://github.com/pybamm-team/pybamm-cookie/discussions"
+Changelog = "https://github.com/pybamm-team/pybamm-cookie/releases"
 
 [tool.hatch]
 version.source = "vcs"
-build.hooks.vcs.version-file = "src/pybamm_cookiecutter/_version.py"
+build.hooks.vcs.version-file = "src/pybamm_cookie/_version.py"
 envs.default.dependencies = [
   "pybamm",
 ]
 
 [tool.hatch.build.targets.wheel]
-only-include = ["src/pybamm_cookiecutter", "/template", "copier.yml", "LICENSE", "LICENSES-bundled.txt"]
+only-include = ["src/pybamm_cookie", "/template", "copier.yml", "LICENSE", "LICENSES-bundled.txt"]
 sources = ["src"]
 
 [tool.mypy]
 packages = [
-  "src/pybamm_cookiecutter",
+  "src/pybamm_cookie",
   "tests"
 ]
 python_version = "3.11"
@@ -100,7 +100,7 @@ allow_redefinition = true
 disable_error_code = ["call-overload", "operator"]
 
 [tool.coverage]
-run.source = ["pybamm_cookiecutter"]
+run.source = ["pybamm_cookie"]
 port.exclude_lines = [
   'pragma: no cover',
 ]

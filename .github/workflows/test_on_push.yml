@@ -6,6 +6,7 @@ on:
   push:
     branches:
     - main
+    - pybammcookie
 
 jobs:
   style:
@@ -38,7 +39,7 @@ jobs:
     name:
       Template Generation/Project Tests (${{ matrix.os }} / Python ${{ matrix.python-version }})
     steps:
-      - name: Checkout pybamm-cookiecutter
+      - name: Checkout pybamm-cookie
         uses: actions/checkout@v4
 
       - name: Set up Python ${{ matrix.python-version }}
@@ -79,7 +80,7 @@ jobs:
     name: Doctests (ubuntu-latest / Python 3.12)
 
     steps:
-      - name: Check out pybamm-cookiecutter repository
+      - name: Check out pybamm-cookie repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -114,7 +115,7 @@ jobs:
     name: Generated Project Tests (${{ matrix.os }} / Python ${{ matrix.python-version }} / Backend ${{ matrix.backend }} / VCS ${{ matrix.vcs }})
 
     steps:
-      - name: Checkout pybamm-cookiecutter
+      - name: Checkout pybamm-cookie
         uses: actions/checkout@v4
 
       - name: Set up Python ${{ matrix.python-version }}
@@ -146,7 +147,7 @@ jobs:
     name: Generated Project Doctests (ubuntu-latest / Python 3.12)
 
     steps:
-      - name: Check out pybamm-cookiecutter repository
+      - name: Check out pybamm-cookie repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0

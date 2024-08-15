@@ -7,7 +7,7 @@ import os
 project_root = Path(__file__).resolve().parent.parent
 TEMPLATE = str(project_root)
 
-def pybamm_cookiecutter_cli():
+def pybamm_cookie_cli():
     """
     Command Line Interface (CLI) for generating PyBaMM based projects using copier.
 
@@ -17,9 +17,9 @@ def pybamm_cookiecutter_cli():
 
     Examples
     -------
-    $ pybamm-cookiecutter
+    $ pybamm-cookie
     Generates a project in the current working directory of the terminal.
-    $ pybamm-cookiecutter --path /myproject
+    $ pybamm-cookie --path /myproject
     Generates a project in the `myproject` directory.
     """
     try:
@@ -31,11 +31,11 @@ def pybamm_cookiecutter_cli():
             help = "The destination path for project generation. The default is the current working directory"
         )
 
-        from pybamm_cookiecutter import __version__ as version
+        from pybamm_cookie import __version__ as version
         parser.add_argument(
             '--version',
             action='version',
-            version=f'PyBaMM Cookiecutter CLI Version - {version}'
+            version=f'pybamm-cookie CLI Version - {version}'
         )
 
         parser.add_argument(
@@ -53,8 +53,8 @@ def pybamm_cookiecutter_cli():
         print(Fore.RED + "Execution stopped by the user" + Fore.RESET)
     except Exception as error:
         print(Fore.RED + "Error caused by an exception: " + Fore.RESET, error)
-        print(Fore.CYAN + "If you are unsure what the error is, feel free to open an issue at" + Fore.YELLOW +" - https://github.com/pybamm-team/pybamm-cookiecutter/issues" + Fore.RESET)
+        print(Fore.CYAN + "If you are unsure what the error is, feel free to open an issue at" + Fore.YELLOW +" - https://github.com/pybamm-team/pybamm-cookie/issues" + Fore.RESET)
 
 if __name__ == '__main__':
 
-    pybamm_cookiecutter_cli()
+    pybamm_cookie_cli()
