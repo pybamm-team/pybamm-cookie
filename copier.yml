@@ -87,7 +87,13 @@ _jinja_extensions:
 
 _subdirectory: template
 
+_exclude:
+  - copier.yml
+
 _tasks:
-  - git init -b {{branch}}
-  - git config user.name "{{full_name}}"
-  - git config user.email "{{email}}"
+  - command: git init -b {{branch}}
+    working_directory: "{{project_name}}"
+  - command: git config user.name {{full_name}}
+    working_directory: "{{project_name}}"
+  - command: git config user.email {{email}}
+    working_directory: "{{project_name}}"

@@ -26,24 +26,42 @@
 <!-- SPHINX-START -->
 [![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
 [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-red.json)](https://github.com/copier-org/copier)
+[![Test template and generated project](https://github.com/pybamm-team/pybamm-cookie/actions/workflows/test_on_push.yml/badge.svg)](https://github.com/pybamm-team/pybamm-cookie/actions/workflows/test_on_push.yml)
 
 This repository contains a `copier` template for battery modeling projects using PyBaMM, released under the [BSD-3-Clause license](https://github.com/pybamm-team/pybamm-cookiecutter/blob/main/LICENSE). Currently under active development.
 
 ## 📄 Using `pybamm-cookiecutter`
 
-### Generating projects with `pybamm-cookiecutter` manually using copier
+### Generating projects with `pybamm-cookiecutter`
 
-This template is not on PyPI yet, so it cannot be installed through `pip` until the first release. Meanwhile, it can be used by cloning this repository and using `copier` to generate a project with this template.
+#### Manually using copier
 
 Install `copier` and `jinja2_time` extension using `pip`.
 ```bash
 pip install copier jinja2-time
 ```
 Generate a project from the `pybamm-cookiecutter` template.
-**Note:** This requires an internet connection. You could manually clone the git repository and run the copy command, or just execute the copy command with the URL to the git repository.
 
 ```bash
-copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git name_of_your_project/ --trust
+copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git . --trust
+# this will generate the project in the current working directory
+copier copy https://github.com/pybamm-team/pybamm-cookiecutter.git path_to_copy_to/ --trust
+# this will generate the project in the specified path
+```
+#### Using pipx (recommended)
+
+You can generate a project by executing the `pipx run` command which doesn't need any package installations.
+```bash
+pipx run pybamm-cookiecutter --path /path_to_copy_to
+```
+
+Or if you wish to install the `pybamm-cookiecutter` package and then generate a project, you could do so with the help of following commands.
+```bash
+pipx install pybamm-cookiecutter  # or pip install pybamm-cookiecutter
+```
+Navigate into the directory you want your project directory to reside in, or use `--path` argument to explicitly mention the path where you want your project to be generated.
+```bash
+pybamm-cookiecutter --path /path_to_copy_to
 ```
 
 Copier will prompt you with various configurations and you may choose the ones that suit your use case.

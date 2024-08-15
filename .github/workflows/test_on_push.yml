@@ -55,11 +55,13 @@ jobs:
       - name: Install nox
         run: uv pip install nox[uv]
 
+      - name: Set up Git
+        run: |
+          git config --global user.name "pybamm user"
+          git config --global user.email "pybammuser@pybamm.org"
+
       - name: Test template generation
         run: nox -s template-tests
-
-      - name: Test project
-        run: nox -s project-tests
 
       - name: Run coverage tests
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
@@ -98,7 +100,6 @@ jobs:
       - name: Check if the documentation can be built
         run: nox -s docs
 
-
   generated_project_tests:
     needs: [template_test]
     runs-on: ${{ matrix.os }}
@@ -121,12 +122,39 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Set up uv
+        uses: yezz123/setup-uv@v4
+        with:
+          uv-venv: ".venv"
+
       - name: Install copier and jinja2_time
-        run: python -m pip install copier jinja2_time
+        run: uv pip install copier jinja2-time
 
       - name: Generate project
         run: |
-          copier copy . ../pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
+          copier copy . ../ --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
+      - name: Install nox
+        uses: wntrblm/nox@2024.04.15
+
+      - name: Test the generated project
+        working-directory: ../pybamm-${{ matrix.backend }}-${{ matrix.vcs }}
+        run: nox -s generated-project-tests
+
+  run_generated_project_doctests:
+    needs: [template_test]
+    runs-on: ubuntu-latest
+    name: Generated Project Doctests (ubuntu-latest / Python 3.12)
+
+    steps:
+      - name: Check out pybamm-cookiecutter repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
 
       - name: Set up uv
         uses: yezz123/setup-uv@v4
@@ -136,6 +164,14 @@ jobs:
       - name: Install nox
         uses: wntrblm/nox@2024.04.15
 
-      - name: Test the generated project
-        working-directory: ../pybamm-${{ matrix.backend }}-${{ matrix.vcs }}
-        run: nox -s generated-project-tests
+      - name: Install copier and jinja2_time and generate a template with default values
+        run: |
+          uv pip install copier jinja2-time
+          copier copy . . --trust --defaults
+
+      - name: Check if the documentation can be built
+        working-directory: ./pybamm-example-project
+        run: |
+          git add .
+          git commit -am "initial commit"
+          nox -s docs

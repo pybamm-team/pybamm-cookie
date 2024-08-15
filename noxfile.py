@@ -46,11 +46,6 @@ def run_template_generation(session):
     """Run tests for the template generation."""
     install_and_run_tests(session, "tests/template_tests")
 
-@nox.session(name="project-tests")
-def run_project_tests(session):
-    """Run the tests for testing project units"""
-    install_and_run_tests(session, "tests/project_tests")
-
 @nox.session(name="coverage")
 def run_coverage(session):
     """Run the coverage tests and generate an XML report."""

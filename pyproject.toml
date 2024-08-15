@@ -6,6 +6,7 @@ build-backend = "hatchling.build"
 name = "pybamm-cookiecutter"
 authors = [
   { name = "Agriya Khetarpal", email = "agriyakhetarpal@outlook.com" },
+  { name = "Santhosh Sundaram", email = "santhoshsundaram9650@gmail.com" },
 ]
 maintainers = [
   { name = "PyBaMM Team", email = "pybamm@pybamm.org" },
@@ -30,7 +31,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dynamic = ["version"]
-dependencies = ["pybamm", "copier", "jinja2-time"]
+dependencies = ["copier", "jinja2-time", "colorama"]
 
 [project.optional-dependencies]
 dev = [
@@ -55,18 +56,17 @@ docs = [
   "sphinx-gallery",
 ]
 
+[project.scripts]
+pybamm-cookiecutter = "pybamm_cookiecutter.cli:pybamm_cookiecutter_cli"
+
+[project.entry-points."pipx.run"]
+pybamm-cookiecutter = "pybamm_cookiecutter.cli:pybamm_cookiecutter_cli"
+
 [project.urls]
 Homepage = "https://github.com/pybamm-team/pybamm-cookiecutter"
 "Bug Tracker" = "https://github.com/pybamm-team/pybamm-cookiecutter/issues"
 Discussions = "https://github.com/pybamm-team/pybamm-cookiecutter/discussions"
 Changelog = "https://github.com/pybamm-team/pybamm-cookiecutter/releases"
-
-[project.entry-points."parameter_sets"]
-Chen2020 = "pybamm_cookiecutter.parameters.input.Chen2020:get_parameter_values"
-
-[project.entry-points."models"]
-SPM = "pybamm_cookiecutter.models.input.SPM:SPM"
-BasicReservoir = "pybamm_cookiecutter.models.input.BasicReservoir:BasicReservoir"
 
 [tool.hatch]
 version.source = "vcs"
@@ -74,6 +74,10 @@ build.hooks.vcs.version-file = "src/pybamm_cookiecutter/_version.py"
 envs.default.dependencies = [
   "pybamm",
 ]
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src/pybamm_cookiecutter", "/template", "copier.yml", "LICENSE", "LICENSES-bundled.txt"]
+sources = ["src"]
 
 [tool.mypy]
 packages = [
