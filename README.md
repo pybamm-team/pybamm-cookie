@@ -118,7 +118,7 @@ pybamm_cookie.__version__
 ```
 A basic generated project with `pybamm-cookie` has a directory structure like the one depicted above. Each directory has a special purpose and is highly recommended to use them for their specific purposes to avoid any errors.
 - `docs/` contains the basic configuration for building documentation using [sphinx](https://www.sphinx-doc.org/).
-- `src/` is wraps the main package files, under a directory with your specified project name. This is where you'd be writing all your code.
+- `src/` contains the main package files under a directory with your specified project name. This is where all your code should be written.
     - `models/input/` - Contains the source code for battery models. Refer [PyBaMM models](https://docs.pybamm.org/en/latest/source/api/models/index.html) to learn how to write your own battery models.
     - `parameters/input/` - Contains the source code for parameters sets. Refer [PyBaMM parameter sets](https://docs.pybamm.org/en/stable/source/api/parameters/parameter_sets.html) to learn more on parameter sets.
 - `tests/` The tests directory contains two sub-directories -
