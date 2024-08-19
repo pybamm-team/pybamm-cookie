@@ -105,13 +105,10 @@ pybamm_cookie.__version__
 │   ├── pybamm_example_project
 │   ├── models
 │   │   └── input
-│   │  
 │   └─ parameters
 │       └── input
-│  
 ├── tests
 │    ├── generated_project_tests
-│    │  
 │    └── user_tests
 ├─ noxfile.py
 └─ pyproject.toml
