@@ -113,7 +113,7 @@ pybamm_cookie.__version__
 │    ├── generated_project_tests
 │    │  
 │    └── user_tests
-├── noxfile.py
+├─ noxfile.py
 └─ pyproject.toml
 ```
 A basic generated project with `pybamm-cookie` has a directory structure like the one depicted above. Each directory has a special purpose and is highly recommended to use them for their specific purposes to avoid any errors.
@@ -130,7 +130,7 @@ A basic generated project with `pybamm-cookie` has a directory structure like th
 
 ## 🚀 Motivation
 
-This project aims to enhance the usability of PyBaMM for both newbies and experienced users alike by providing standardised templates that incorporate best practices and automation tools. The `pybamm-cookie` template is set to lower the barrier to battery modeling, making it easier for the research community to adopt PyBaMM for their battery modeling projects. The project also supports model entry points and parameter set entry points, allowing community contributors to create and share models/parameter sets of their repositories using the copier template without directly adding them upstream. This would not only let community contributors retain ownership and choose license terms but also grant flexibility to the PyBaMM team in supporting models, Including all of GitHub’s functionality and infrastructure contained within the template.
+This project aims to enhance the usability of PyBaMM for both newcomers and experienced users alike by providing standardised templates that incorporate best practices and automation tools. The `pybamm-cookie` template is set to lower the barrier to battery modeling, making it easier for the research community to adopt PyBaMM for their battery modeling projects. The project also supports model entry points and parameter set entry points, allowing community contributors to create and share models/parameter sets of their repositories using the copier template without directly adding them upstream. This lets community contributors retain ownership and choose license terms and also grants flexibility to the PyBaMM team in supporting models. Support for all of GitHub’s functionality and infrastructure is contained within the template.
 
 ## 🛠️ Contributing to `pybamm-cookie`
 
