@@ -119,8 +119,8 @@ pybamm_cookie.__version__
 A basic generated project with `pybamm-cookie` has a directory structure like the one depicted above. Each directory has a special purpose and is highly recommended to use them for their specific purposes to avoid any errors.
 - `docs/` contains the basic configuration for building documentation using [sphinx](https://www.sphinx-doc.org/).
 - `src/` is wraps the main package files, under a directory with your specified project name. This is where you'd be writing all your code.
-    - `models/input/` - Contains the source code for battery models. Refer [here](https://docs.pybamm.org/en/latest/source/api/models/index.html) to learn how to write your own battery models.
-    - `parameters/input/` - Contains the source code for parameters sets. Refer [here](https://docs.pybamm.org/en/stable/source/api/parameters/parameter_sets.html) to learn more on parameter sets.
+    - `models/input/` - Contains the source code for battery models. Refer [PyBaMM models](https://docs.pybamm.org/en/latest/source/api/models/index.html) to learn how to write your own battery models.
+    - `parameters/input/` - Contains the source code for parameters sets. Refer [PyBaMM parameter sets](https://docs.pybamm.org/en/stable/source/api/parameters/parameter_sets.html) to learn more on parameter sets.
 - `tests/` The tests directory contains two sub-directories -
     - `generated_project_tests/` - Contains pre-defined tests for verifying if the units inside generated project work well. It can be verified using `nox -s generated-project-tests` command.
     - `user_tests/` - This directory contains all the user written tests, the example tests can be copied and modified as per your own needs. We suggest you use [pytest](https://docs.pytest.org/en/stable/) to write tests. The tests can be then run by executing `nox -s user-tests`.
