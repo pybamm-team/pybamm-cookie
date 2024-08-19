@@ -122,8 +122,8 @@ A basic generated project with `pybamm-cookie` has a directory structure like th
     - `models/input/` - Contains the source code for battery models. Refer [PyBaMM models](https://docs.pybamm.org/en/latest/source/api/models/index.html) to learn how to write your own battery models.
     - `parameters/input/` - Contains the source code for parameters sets. Refer [PyBaMM parameter sets](https://docs.pybamm.org/en/stable/source/api/parameters/parameter_sets.html) to learn more on parameter sets.
 - `tests/` The tests directory contains two sub-directories -
-    - `generated_project_tests/` - Contains pre-defined tests for verifying if the units inside generated project work well. It can be verified using `nox -s generated-project-tests` command.
-    - `user_tests/` - This directory contains all the user written tests, the example tests can be copied and modified as per your own needs. We suggest you use [pytest](https://docs.pytest.org/en/stable/) to write tests. The tests can be then run by executing `nox -s user-tests`.
+    - `generated_project_tests/` - Contains pre-defined tests for verifying if the units inside generated project work well. It can be verified using `nox -s generated-project-tests` or `pytest tests/generated_project_tests` command.
+    - `user_tests/` - This directory contains all the user written tests, the example tests can be copied and modified as per your own needs. We suggest you use [pytest](https://docs.pytest.org/en/stable/) to write tests. The tests can be then run by executing `nox -s user-tests` or `pytest tests/user_tests`.
 - `noxfile.py` contains basic `nox sessions` for building documentation and runnings tests.
 - `pyproject.toml` has project metadata and build backend configurations.
 - `github/workflows/` has all the basic CI configurations to automate tests and builds on [GitHub Actions](https://github.com/features/actions).
