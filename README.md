@@ -23,7 +23,7 @@
 [rtd-badge]:                https://readthedocs.org/projects/pybamm-cookie/badge/?version=latest
 [rtd-link]:                 https://pybamm-cookie.readthedocs.io/en/latest/?badge=latest -->
 
-![pybamm-cookie](docs/_static/pybammcookie.png)
+![pybamm-cookie](docs/_static/pybammcookiewhite.png)
 <!-- SPHINX-START -->
 [![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
 [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-inverted-border-red.json)](https://github.com/copier-org/copier)
