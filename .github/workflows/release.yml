@@ -1,6 +1,6 @@
 jobs:
-  build-wheels:
-    name: upload pybamm-cookie wheel artifacts
+  build:
+    name: Build and pybamm-cookie sdist and wheel
     runs-on: ubuntu-latest
     steps:
       - name: Checkout pybamm-cookie
@@ -8,8 +8,6 @@ jobs:
 
       - name: Setup Python
         uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
 
       - name: Build package
         run: pipx run build
@@ -17,13 +15,13 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4.3.6
         with:
-          name: pybamm_cookie_wheel
-          path: ./dist/*.whl
+          name: sdist_and_wheel
+          path: ./dist/*
           if-no-files-found: error
 
   publish-pypi:
     name: Upload package to PyPI
-    needs: [build-wheels]
+    needs: [build]
     runs-on: ubuntu-latest
     environment: release
     permissions:
@@ -34,6 +32,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: artifacts
+          merge-multiple: true
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@ec4db0b4ddc65acdf4bff5fa45ac92d78b56bdf0
