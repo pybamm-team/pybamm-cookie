@@ -7,5 +7,24 @@ jobs:
       id-token: write
     steps:
 
+      - name: Checkout pybamm-cookie
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+
+      - name: Set up uv
+        uses: yezz123/setup-uv@v4
+        with:
+          uv-venv: ".venv"
+
+      - name: Install dependencies
+        run: uv pip install build hatch
+
+      - name: Build package
+        run: python -m build
+
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
