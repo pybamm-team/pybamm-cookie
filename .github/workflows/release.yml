@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 jobs:
   build:
     name: Build and pybamm-cookie sdist and wheel
@@ -5,36 +6,50 @@ jobs:
     steps:
       - name: Checkout pybamm-cookie
       - uses: actions/checkout@v4
+=======
+name: Publish to PyPI
+on:
+  release:
+    types: [published]
+>>>>>>> Stashed changes
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+  jobs:
+    build:
+      name: Build and pybamm-cookie sdist and wheel
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout pybamm-cookie
+          uses: actions/checkout@v4
 
-      - name: Build package
-        run: pipx run build
+        - name: Setup Python
+          uses: actions/setup-python@v5
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4.3.6
-        with:
-          name: sdist_and_wheel
-          path: ./dist/*
-          if-no-files-found: error
+        - name: Build package
+          run: pipx run build
 
-  publish-pypi:
-    name: Upload package to PyPI
-    needs: [build]
-    runs-on: ubuntu-latest
-    environment: release
-    permissions:
-      id-token: write
+        - name: Upload artifacts
+          uses: actions/upload-artifact@v4.3.6
+          with:
+            name: sdist_and_wheel
+            path: ./dist/*
+            if-no-files-found: error
 
-    steps:
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: artifacts
-          merge-multiple: true
+    publish-pypi:
+      name: Upload package to PyPI
+      needs: [build]
+      runs-on: ubuntu-latest
+      environment: release
+      permissions:
+        id-token: write
 
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@ec4db0b4ddc65acdf4bff5fa45ac92d78b56bdf0
-        with:
-          packages-dir: artifacts/
+      steps:
+        - name: Download all artifacts
+          uses: actions/download-artifact@v4
+          with:
+            path: artifacts
+            merge-multiple: true
+
+        - name: Publish to PyPI
+          uses: pypa/gh-action-pypi-publish@ec4db0b4ddc65acdf4bff5fa45ac92d78b56bdf0
+          with:
+            packages-dir: artifacts/
