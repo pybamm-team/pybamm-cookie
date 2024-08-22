@@ -80,16 +80,21 @@ If you performed the `pre-commit install` step above, your code changes will be 
 
 All code requires testing. We use the [Pytest](https://docs.pytest.org/en/) package for our tests. (These tests typically just check that the code runs without error, and so, are more _debugging_ than _testing_ in a strict sense. Nevertheless, they are very useful to have!).
 
-If you have `nox` installed, to run tests, type
+If you have `nox` installed, to run tests for the template, type
 
 ```bash
-nox -s test-generation
+nox -s template-tests
 ```
 
 else, type
 
 ```bash
 pytest tests/
+```
+
+To test a generated project, meaning a project generated out of `pybamm-cookie`, you can simply run
+```bash
+nox -s generated-project-tests
 ```
 
 ### Writing tests
