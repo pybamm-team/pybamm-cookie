@@ -1,12 +1,8 @@
 jobs:
-  pypi-publish:
-    name: upload release to PyPI
+  build-wheels:
+    name: upload pybamm-cookie wheel artifacts
     runs-on: ubuntu-latest
-    environment: release
-    permissions:
-      id-token: write
     steps:
-
       - name: Checkout pybamm-cookie
       - uses: actions/checkout@v4
 
@@ -15,16 +11,31 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: Set up uv
-        uses: yezz123/setup-uv@v4
-        with:
-          uv-venv: ".venv"
-
-      - name: Install dependencies
-        run: uv pip install build hatch
-
       - name: Build package
-        run: python -m build
+        run: pipx run build
 
-      - name: Publish package distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@ec4db0b4ddc65acdf4bff5fa45ac92d78b56bdf0  # v1.9.0
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4.3.6
+        with:
+          name: pybamm_cookie_wheel
+          path: ./dist/*.whl
+          if-no-files-found: error
+
+  publish-pypi:
+    name: Upload package to PyPI
+    needs: [build-wheels]
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@ec4db0b4ddc65acdf4bff5fa45ac92d78b56bdf0
+        with:
+          packages-dir: artifacts/
