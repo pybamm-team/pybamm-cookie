@@ -1,17 +1,7 @@
-<<<<<<< Updated upstream
-jobs:
-  build:
-    name: Build and pybamm-cookie sdist and wheel
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout pybamm-cookie
-      - uses: actions/checkout@v4
-=======
 name: Publish to PyPI
 on:
   release:
     types: [published]
->>>>>>> Stashed changes
 
   jobs:
     build:
