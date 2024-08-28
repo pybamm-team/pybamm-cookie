@@ -97,6 +97,11 @@ jobs:
       - name: Install nox
         run: uv pip install nox[uv]
 
+      - name: Set up Git
+        run: |
+          git config --global user.name "pybamm user"
+          git config --global user.email "pybammuser@pybamm.org"
+
       - name: Check if the documentation can be built
         run: nox -s docs
 
