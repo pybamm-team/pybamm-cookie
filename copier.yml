@@ -93,7 +93,3 @@ _exclude:
 _tasks:
   - command: git init -b {{branch}}
     working_directory: "{{project_name}}"
-  - command: git config user.name {{full_name}}
-    working_directory: "{{project_name}}"
-  - command: git config user.email {{email}}
-    working_directory: "{{project_name}}"
