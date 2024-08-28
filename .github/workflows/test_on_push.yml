@@ -57,8 +57,8 @@ jobs:
 
       - name: Set up Git
         run: |
-          git config --global user.name "pybamm user"
-          git config --global user.email "pybammuser@pybamm.org"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Test template generation
         run: nox -s template-tests
@@ -99,8 +99,8 @@ jobs:
 
       - name: Set up Git
         run: |
-          git config --global user.name "pybamm user"
-          git config --global user.email "pybammuser@pybamm.org"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Check if the documentation can be built
         run: nox -s docs
@@ -173,6 +173,11 @@ jobs:
         run: |
           uv pip install copier jinja2-time
           copier copy . . --trust --defaults
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Check if the documentation can be built
         working-directory: ./pybamm-example-project
