@@ -77,7 +77,8 @@ pybamm-cookie
 Copier will prompt you with various configurations and you may choose the ones that suit your use case.
 Additionally you can perform `pybamm-cookie -h` to know the list of actions you can perform with the CLI.
 
-**Note**: A `git` repository is automatically initialised when a project is created within a directory.
+> [!NOTE]
+> A `git` repository is automatically initialised when a project is created within a directory, to push the contents to upstream GitHub repository, follow these steps in the [GitHub documentation](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#adding-a-remote-repository).
 
 After generation, you can navigate to the generated project and run `nox -s generated-project-tests` to ensure if the project units are working as intended.
 
