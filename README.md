@@ -78,7 +78,7 @@ Copier will prompt you with various configurations and you may choose the ones t
 Additionally you can perform `pybamm-cookie -h` to know the list of actions you can perform with the CLI.
 
 > [!NOTE]
-> A `git` repository is automatically initialised when a project is created within a directory. To push the contents to the upstream GitHub repository, follow these steps as listed in the [GitHub documentation](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#adding-a-remote-repository).
+> A `git` repository is automatically initialised when a project is created within a directory. To push the contents to the upstream GitHub repository, create a GitHub repository with the same name as your local repository and do not initialise your GitHub repository with any files such as licenses or README which might conflict with the local repository, follow these steps as listed in the [GitHub documentation](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github#adding-a-local-repository-to-github-using-git).
 
 After generation, you can navigate to the generated project and run `nox -s generated-project-tests` to ensure if the project units are working as intended.
 
