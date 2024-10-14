@@ -139,7 +139,7 @@ jobs:
         run: |
           copier copy . ../ --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
       - name: Install nox
-        uses: wntrblm/nox@2024.04.15
+        uses: wntrblm/nox@2024.10.09
 
       - name: Test the generated project
         working-directory: ../pybamm-${{ matrix.backend }}-${{ matrix.vcs }}
@@ -167,7 +167,7 @@ jobs:
           uv-venv: ".venv"
 
       - name: Install nox
-        uses: wntrblm/nox@2024.04.15
+        uses: wntrblm/nox@2024.10.09
 
       - name: Install copier and jinja2_time and generate a template with default values
         run: |
