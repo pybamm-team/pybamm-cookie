@@ -163,7 +163,6 @@ jobs:
       - name: Install dependencies
         run: |
           uv pip install copier jinja2_time
-          uv tool install nox
 
       - name: Install copier and jinja2_time and generate a template with default values
         run: copier copy . . --trust --defaults
@@ -178,4 +177,4 @@ jobs:
         run: |
           git add .
           git commit -am "initial commit"
-          nox -s docs --verbose
+          uvx nox -s docs --verbose
