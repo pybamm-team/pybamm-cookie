@@ -12,15 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-
       - name: Set up uv
-        uses: yezz123/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
-          uv-venv: ".venv"
+          version: "latest"
 
       - name: Check style
         run: |
@@ -41,16 +36,11 @@ jobs:
       - name: Checkout pybamm-cookie
         uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        id: setup-python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
       - name: Set up uv
-        uses: yezz123/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
-          uv-venv: ".venv"
+          version: "latest"
+          python-version: ${{ matrix.python-version }}
 
       - name: Install nox
         run: uv pip install nox[uv]
@@ -84,15 +74,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-
       - name: Set up uv
-        uses: yezz123/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
-          uv-venv: ".venv"
+          version: "latest"
 
       - name: Install nox
         run: uv pip install nox[uv]
@@ -122,15 +107,11 @@ jobs:
       - name: Checkout pybamm-cookie
         uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
       - name: Set up uv
-        uses: yezz123/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
-          uv-venv: ".venv"
+          version: "latest"
+          python-version: ${{ matrix.python-version }}
 
       - name: Install copier and jinja2_time
         run: uv pip install copier jinja2-time
@@ -156,15 +137,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-
       - name: Set up uv
-        uses: yezz123/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
-          uv-venv: ".venv"
+          version: "latest"
 
       - name: Install nox
         uses: wntrblm/nox@2024.10.09
