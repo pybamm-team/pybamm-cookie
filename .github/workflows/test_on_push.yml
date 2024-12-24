@@ -7,6 +7,17 @@ on:
     branches:
     - main
 
+concurrency:
+  # Skip intermediate builds: always.
+  # Cancel intermediate builds: only if it is a pull request build.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+env:
+  # The "FORCE_COLOR" variable, when set to 1,
+  # tells Nox to colorize itself.
+  FORCE_COLOR: "1"
+
 jobs:
   style:
     runs-on: ubuntu-latest
@@ -16,6 +27,8 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           version: "latest"
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
 
       - name: Check style
         run: |
@@ -40,6 +53,8 @@ jobs:
         with:
           version: "latest"
           python-version: ${{ matrix.python-version }}
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
 
       - name: Install nox
         run: uv tool install nox
@@ -50,11 +65,11 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Test template generation
-        run: nox -s template-tests
+        run: nox -s template-tests --verbose
 
       - name: Run coverage tests
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
-        run: nox -s coverage
+        run: nox -s coverage --verbose
 
       - name: Upload coverage report
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
@@ -77,6 +92,8 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           version: "latest"
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
 
       - name: Set up Git
         run: |
@@ -84,7 +101,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Check if the documentation can be built
-        run: uvx nox -s docs
+        run: uvx nox -s docs --verbose
 
   generated_project_tests:
     needs: [template_test]
@@ -108,6 +125,8 @@ jobs:
         with:
           version: "latest"
           python-version: ${{ matrix.python-version }}
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
 
       - name: Install dependencies
         run: |
@@ -119,7 +138,7 @@ jobs:
 
       - name: Test the generated project
         working-directory: ../pybamm-${{ matrix.backend }}-${{ matrix.vcs }}
-        run: nox -s generated-project-tests
+        run: nox -s generated-project-tests --verbose
 
   run_generated_project_doctests:
     needs: [template_test]
@@ -138,6 +157,8 @@ jobs:
         with:
           version: "latest"
           python-version: 3.12
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
 
       - name: Install dependencies
         run: |
@@ -157,4 +178,4 @@ jobs:
         run: |
           git add .
           git commit -am "initial commit"
-          nox -s docs
+          nox -s docs --verbose
