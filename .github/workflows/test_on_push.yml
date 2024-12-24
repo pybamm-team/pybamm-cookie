@@ -161,8 +161,7 @@ jobs:
           cache-dependency-glob: "**/pyproject.toml"
 
       - name: Install dependencies
-        run: |
-          uv pip install copier jinja2_time
+        run: uv pip install copier jinja2_time
 
       - name: Install copier and jinja2_time and generate a template with default values
         run: copier copy . . --trust --defaults
