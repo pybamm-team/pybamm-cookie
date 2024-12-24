@@ -110,7 +110,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: uv pip install copier jinja2_time nox[uv]
+        run: |
+          uv pip install copier jinja2_time
+          uv tool install nox
 
       - name: Generate project
         run: copier copy . ../ --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
@@ -136,9 +138,10 @@ jobs:
         with:
           version: "latest"
 
-
       - name: Install dependencies
-        run: uv pip install copier jinja2_time nox[uv]
+        run: |
+          uv pip install copier jinja2_time
+          uv tool install nox
 
       - name: Install copier and jinja2_time and generate a template with default values
         run: copier copy . . --trust --defaults
