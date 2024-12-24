@@ -135,7 +135,7 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           version: "latest"
-          
+
 
       - name: Install dependencies
         run: uv pip install copier jinja2_time nox[uv]
