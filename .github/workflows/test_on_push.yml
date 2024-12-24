@@ -19,8 +19,7 @@ jobs:
 
       - name: Check style
         run: |
-          uv pip install pre-commit
-          pre-commit run -a
+          uvx pre-commit run -a
 
   template_test:
     needs: style
@@ -43,7 +42,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install nox
-        run: uv pip install nox[uv]
+        run: uv tool install nox
 
       - name: Set up Git
         run: |
@@ -79,16 +78,13 @@ jobs:
         with:
           version: "latest"
 
-      - name: Install nox
-        run: uv pip install nox[uv]
-
       - name: Set up Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Check if the documentation can be built
-        run: nox -s docs
+        run: uvx nox -s docs
 
   generated_project_tests:
     needs: [template_test]
@@ -113,18 +109,14 @@ jobs:
           version: "latest"
           python-version: ${{ matrix.python-version }}
 
-      - name: Install copier and jinja2_time
-        run: uv pip install copier jinja2-time
-
       - name: Generate project
-        run: |
-          copier copy . ../ --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
+        run: uvx copier copy . ../ --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
       - name: Install nox
         uses: wntrblm/nox@2024.10.09
 
       - name: Test the generated project
         working-directory: ../pybamm-${{ matrix.backend }}-${{ matrix.vcs }}
-        run: nox -s generated-project-tests
+        run: uvx nox -s generated-project-tests
 
   run_generated_project_doctests:
     needs: [template_test]
@@ -142,13 +134,8 @@ jobs:
         with:
           version: "latest"
 
-      - name: Install nox
-        uses: wntrblm/nox@2024.10.09
-
       - name: Install copier and jinja2_time and generate a template with default values
-        run: |
-          uv pip install copier jinja2-time
-          copier copy . . --trust --defaults
+        run: uvx copier copy . . --trust --defaults
 
       - name: Set up Git
         run: |
@@ -160,4 +147,4 @@ jobs:
         run: |
           git add .
           git commit -am "initial commit"
-          nox -s docs
+          uvx nox -s docs
