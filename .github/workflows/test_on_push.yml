@@ -109,14 +109,15 @@ jobs:
           version: "latest"
           python-version: ${{ matrix.python-version }}
 
+      - name: Install dependencies
+        run: uv pip install copier jinja2_time nox[uv]
+
       - name: Generate project
-        run: uvx copier copy . ../ --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
-      - name: Install nox
-        uses: wntrblm/nox@2024.10.09
+        run: copier copy . ../ --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
 
       - name: Test the generated project
         working-directory: ../pybamm-${{ matrix.backend }}-${{ matrix.vcs }}
-        run: uvx nox -s generated-project-tests
+        run: nox -s generated-project-tests
 
   run_generated_project_doctests:
     needs: [template_test]
@@ -128,14 +129,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          python-version: 3.12
 
       - name: Set up uv
         uses: astral-sh/setup-uv@v5
         with:
           version: "latest"
+          
+
+      - name: Install dependencies
+        run: uv pip install copier jinja2_time nox[uv]
 
       - name: Install copier and jinja2_time and generate a template with default values
-        run: uvx copier copy . . --trust --defaults
+        run: copier copy . . --trust --defaults
 
       - name: Set up Git
         run: |
@@ -147,4 +153,4 @@ jobs:
         run: |
           git add .
           git commit -am "initial commit"
-          uvx nox -s docs
+          nox -s docs
