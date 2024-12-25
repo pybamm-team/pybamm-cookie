@@ -7,25 +7,32 @@ on:
     branches:
     - main
 
+concurrency:
+  # Skip intermediate builds: always.
+  # Cancel intermediate builds: only if it is a pull request build.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+env:
+  # This will let tools make use of the full palette of
+  # 256 colours.
+  FORCE_COLOR: "3"
+
 jobs:
   style:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-
       - name: Set up uv
-        uses: yezz123/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
-          uv-venv: ".venv"
+          version: "latest"
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
 
       - name: Check style
         run: |
-          uv pip install pre-commit
-          pre-commit run -a
+          uvx pre-commit run -a
 
   template_test:
     needs: style
@@ -41,19 +48,16 @@ jobs:
       - name: Checkout pybamm-cookie
         uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        id: setup-python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
       - name: Set up uv
-        uses: yezz123/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
-          uv-venv: ".venv"
+          version: "latest"
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
 
       - name: Install nox
-        run: uv pip install nox[uv]
+        run: uv tool install nox
 
       - name: Set up Git
         run: |
@@ -61,11 +65,11 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Test template generation
-        run: nox -s template-tests
+        run: nox -s template-tests --verbose
 
       - name: Run coverage tests
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
-        run: nox -s coverage
+        run: nox -s coverage --verbose
 
       - name: Upload coverage report
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
@@ -84,18 +88,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-
       - name: Set up uv
-        uses: yezz123/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
-          uv-venv: ".venv"
-
-      - name: Install nox
-        run: uv pip install nox[uv]
+          version: "latest"
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
 
       - name: Set up Git
         run: |
@@ -103,7 +101,7 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Check if the documentation can be built
-        run: nox -s docs
+        run: uvx nox -s docs --verbose
 
   generated_project_tests:
     needs: [template_test]
@@ -122,28 +120,25 @@ jobs:
       - name: Checkout pybamm-cookie
         uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
       - name: Set up uv
-        uses: yezz123/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
-          uv-venv: ".venv"
+          version: "latest"
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
 
-      - name: Install copier and jinja2_time
-        run: uv pip install copier jinja2-time
+      - name: Install dependencies
+        run: |
+          uv pip install copier jinja2_time
+          uv tool install nox
 
       - name: Generate project
-        run: |
-          copier copy . ../ --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
-      - name: Install nox
-        uses: wntrblm/nox@2024.10.09
+        run: copier copy . ../ --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
 
       - name: Test the generated project
         working-directory: ../pybamm-${{ matrix.backend }}-${{ matrix.vcs }}
-        run: nox -s generated-project-tests
+        run: nox -s generated-project-tests --verbose
 
   run_generated_project_doctests:
     needs: [template_test]
@@ -155,24 +150,21 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
           python-version: 3.12
 
       - name: Set up uv
-        uses: yezz123/setup-uv@v4
+        uses: astral-sh/setup-uv@v5
         with:
-          uv-venv: ".venv"
+          version: "latest"
+          python-version: 3.12
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
 
-      - name: Install nox
-        uses: wntrblm/nox@2024.10.09
+      - name: Install dependencies
+        run: uv pip install copier jinja2_time
 
       - name: Install copier and jinja2_time and generate a template with default values
-        run: |
-          uv pip install copier jinja2-time
-          copier copy . . --trust --defaults
+        run: copier copy . . --trust --defaults
 
       - name: Set up Git
         run: |
@@ -184,4 +176,4 @@ jobs:
         run: |
           git add .
           git commit -am "initial commit"
-          nox -s docs
+          uvx nox -s docs --verbose
