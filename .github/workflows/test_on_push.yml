@@ -14,8 +14,8 @@ concurrency:
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
 env:
-  # The "FORCE_COLOR" variable, when set to 1,
-  # tells Nox to colorize itself.
+  # This will let tools make use of the full palette of
+  # 256 colours.
   FORCE_COLOR: "3"
 
 jobs:
