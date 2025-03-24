@@ -18,7 +18,7 @@ jobs:
         run: pipx run build
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4.6.1
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: sdist_and_wheel
           path: ./dist/*
