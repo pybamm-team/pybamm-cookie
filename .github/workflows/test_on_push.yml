@@ -31,8 +31,7 @@ jobs:
           cache-dependency-glob: "**/pyproject.toml"
 
       - name: Check style
-        run: |
-          uvx pre-commit run -a
+        run: uvx pre-commit run -a
 
   template_test:
     needs: style
@@ -53,6 +52,7 @@ jobs:
         with:
           version: "latest"
           python-version: ${{ matrix.python-version }}
+          activate-environment: true
           enable-cache: true
           cache-dependency-glob: "**/pyproject.toml"
 
@@ -125,6 +125,7 @@ jobs:
         with:
           version: "latest"
           python-version: ${{ matrix.python-version }}
+          activate-environment: true
           enable-cache: true
           cache-dependency-glob: "**/pyproject.toml"
 
@@ -157,6 +158,7 @@ jobs:
         with:
           version: "latest"
           python-version: 3.12
+          activate-environment: true
           enable-cache: true
           cache-dependency-glob: "**/pyproject.toml"
 
