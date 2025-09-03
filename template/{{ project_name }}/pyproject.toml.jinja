@@ -62,7 +62,7 @@ classifiers = [
 {%- if backend == "hatch" %}
 dynamic = ["version"]
 {%- endif %}
-dependencies = ["pybamm",]
+dependencies = ["pybamm>=25.8",]
 
 [project.optional-dependencies]
 dev = [
@@ -106,7 +106,7 @@ version.source = "vcs"
 build.hooks.vcs.version-file = "src/{{ project_slug }}/_version.py"
 {%- endif %}
 envs.default.dependencies = [
-  "pybamm",
+  "pybamm>=25.8",
   ]
 {%- endif %}
 
