@@ -18,7 +18,7 @@ jobs:
         run: pipx run build
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v5.0.0
         with:
           name: sdist_and_wheel
           path: ./dist/*
@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - name: Download all artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           path: artifacts
           merge-multiple: true
