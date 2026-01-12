@@ -111,10 +111,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-14, macos-15-intel, windows-latest]
         python-version: ["3.9", "3.10", "3.11", "3.12"]
-        backend: [hatch, setuptools]
-        vcs: [true, false]
 
-    name: Generated Project Tests (${{ matrix.os }} / Python ${{ matrix.python-version }} / Backend ${{ matrix.backend }} / VCS ${{ matrix.vcs }})
+    name: Generated Project Tests (${{ matrix.os }} / Python ${{ matrix.python-version }})
 
     steps:
       - name: Checkout pybamm-cookie
@@ -134,12 +132,33 @@ jobs:
           uv pip install copier jinja2_time
           uv tool install nox
 
-      - name: Generate project
-        run: copier copy . ../ --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Test the generated project
-        working-directory: ../pybamm-${{ matrix.backend }}-${{ matrix.vcs }}
+      - name: Generate projects with Copier
+        run: |
+          copier copy . ../ --data project_name=pybamm-hatch-true --data project_slug=pybamm_hatch_true --data backend=hatch --data vcs=true --trust --defaults
+          copier copy . ../ --data project_name=pybamm-hatch-false --data project_slug=pybamm_hatch_false --data backend=hatch --data vcs=false --trust --defaults
+          copier copy . ../ --data project_name=pybamm-setuptools-true --data project_slug=pybamm_setuptools_true --data backend=setuptools --data vcs=true --trust --defaults
+          copier copy . ../ --data project_name=pybamm-setuptools-false --data project_slug=pybamm_setuptools_false --data backend=setuptools --data vcs=false --trust --defaults
+
+      - name: Run nox tests for pybamm-hatch-true
         run: nox -s generated-project-tests --verbose
+        working-directory: ../pybamm-hatch-true
+
+      - name: Run nox tests for pybamm-hatch-false
+        run: nox -s generated-project-tests --verbose
+        working-directory: ../pybamm-hatch-false
+
+      - name: Run nox tests for pybamm-setuptools-true
+        run: nox -s generated-project-tests --verbose
+        working-directory: ../pybamm-setuptools-true
+
+      - name: Run nox tests for pybamm-setuptools-false
+        run: nox -s generated-project-tests --verbose
+        working-directory: ../pybamm-setuptools-false
 
   run_generated_project_doctests:
     needs: [template_test]
