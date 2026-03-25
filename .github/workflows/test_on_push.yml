@@ -22,7 +22,7 @@ jobs:
   style:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Set up uv
         uses: astral-sh/setup-uv@v7
         with:
@@ -39,13 +39,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-13, macos-14, windows-latest]
+        os: [ubuntu-latest, macos-14, macos-15-intel, windows-latest]
         python-version: ["3.9", "3.10", "3.11", "3.12"]
     name:
       Template Generation/Project Tests (${{ matrix.os }} / Python ${{ matrix.python-version }})
     steps:
       - name: Checkout pybamm-cookie
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up uv
         uses: astral-sh/setup-uv@v7
@@ -73,7 +73,7 @@ jobs:
 
       - name: Upload coverage report
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
-        uses: codecov/codecov-action@v5.5.1
+        uses: codecov/codecov-action@v5.5.3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
@@ -84,7 +84,7 @@ jobs:
 
     steps:
       - name: Check out pybamm-cookie repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -109,14 +109,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-13, macos-14, windows-latest]
+        os: [ubuntu-latest, macos-14, macos-15-intel, windows-latest]
         python-version: ["3.9", "3.10", "3.11", "3.12"]
 
     name: Generated Project Tests (${{ matrix.os }} / Python ${{ matrix.python-version }})
 
     steps:
       - name: Checkout pybamm-cookie
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up uv
         uses: astral-sh/setup-uv@v7
@@ -167,7 +167,7 @@ jobs:
 
     steps:
       - name: Check out pybamm-cookie repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           python-version: 3.12
