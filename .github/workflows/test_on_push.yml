@@ -1,4 +1,4 @@
-name: Test template and generated project
+name: Test
 
 on:
   workflow_dispatch:
@@ -8,14 +8,10 @@ on:
     - main
 
 concurrency:
-  # Skip intermediate builds: always.
-  # Cancel intermediate builds: only if it is a pull request build.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
 env:
-  # This will let tools make use of the full palette of
-  # 256 colours.
   FORCE_COLOR: "3"
 
 jobs:
@@ -77,6 +73,32 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: Install copier and jinja2_time
+        run: uv pip install copier jinja2_time
+
+      - name: Generate projects with Copier
+        run: |
+          copier copy . ../ --data project_name=pybamm-hatch-true --data project_slug=pybamm_hatch_true --data backend=hatch --data vcs=true --trust --defaults
+          copier copy . ../ --data project_name=pybamm-hatch-false --data project_slug=pybamm_hatch_false --data backend=hatch --data vcs=false --trust --defaults
+          copier copy . ../ --data project_name=pybamm-setuptools-true --data project_slug=pybamm_setuptools_true --data backend=setuptools --data vcs=true --trust --defaults
+          copier copy . ../ --data project_name=pybamm-setuptools-false --data project_slug=pybamm_setuptools_false --data backend=setuptools --data vcs=false --trust --defaults
+
+      - name: Run nox tests for pybamm-hatch-true
+        run: nox -s generated-project-tests --verbose
+        working-directory: ../pybamm-hatch-true
+
+      - name: Run nox tests for pybamm-hatch-false
+        run: nox -s generated-project-tests --verbose
+        working-directory: ../pybamm-hatch-false
+
+      - name: Run nox tests for pybamm-setuptools-true
+        run: nox -s generated-project-tests --verbose
+        working-directory: ../pybamm-setuptools-true
+
+      - name: Run nox tests for pybamm-setuptools-false
+        run: nox -s generated-project-tests --verbose
+        working-directory: ../pybamm-setuptools-false
+
   run_doctests:
     needs: style
     runs-on: ubuntu-latest
@@ -103,44 +125,6 @@ jobs:
       - name: Check if the documentation can be built
         run: uvx nox -s docs --verbose
 
-  generated_project_tests:
-    needs: [template_test]
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-14, macos-15-intel, windows-latest]
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
-        backend: [hatch, setuptools]
-        vcs: [true, false]
-
-    name: Generated Project Tests (${{ matrix.os }} / Python ${{ matrix.python-version }} / Backend ${{ matrix.backend }} / VCS ${{ matrix.vcs }})
-
-    steps:
-      - name: Checkout pybamm-cookie
-        uses: actions/checkout@v6
-
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v7
-        with:
-          version: "latest"
-          python-version: ${{ matrix.python-version }}
-          activate-environment: true
-          enable-cache: true
-          cache-dependency-glob: "**/pyproject.toml"
-
-      - name: Install dependencies
-        run: |
-          uv pip install copier jinja2_time
-          uv tool install nox
-
-      - name: Generate project
-        run: copier copy . ../ --data project_name=pybamm-${{ matrix.backend }}-${{ matrix.vcs }} --data project_slug=pybamm_${{ matrix.backend }}_${{ matrix.vcs }} --data backend=${{ matrix.backend }} --data vcs=${{ matrix.vcs }} --trust --defaults
-
-      - name: Test the generated project
-        working-directory: ../pybamm-${{ matrix.backend }}-${{ matrix.vcs }}
-        run: nox -s generated-project-tests --verbose
-
   run_generated_project_doctests:
     needs: [template_test]
     runs-on: ubuntu-latest
@@ -151,13 +135,12 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          python-version: 3.12
 
       - name: Set up uv
         uses: astral-sh/setup-uv@v7
         with:
           version: "latest"
-          python-version: 3.12
+          python-version: "3.12"
           activate-environment: true
           enable-cache: true
           cache-dependency-glob: "**/pyproject.toml"
@@ -165,7 +148,7 @@ jobs:
       - name: Install dependencies
         run: uv pip install copier jinja2_time
 
-      - name: Install copier and jinja2_time and generate a template with default values
+      - name: Generate a template with default values
         run: copier copy . . --trust --defaults
 
       - name: Set up Git
