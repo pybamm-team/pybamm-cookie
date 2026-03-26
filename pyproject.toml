@@ -13,7 +13,7 @@ maintainers = [
 ]
 description = "A template for creating battery modeling projects based on PyBaMM"
 readme = "README.md"
-requires-python = ">=3.8"  # PyBaMM supports 3.8 and above
+requires-python = ">=3.10,<3.15"
 classifiers = [
   "Development Status :: 1 - Planning",
   "Intended Audience :: Science/Research",
@@ -23,10 +23,11 @@ classifiers = [
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",  # PyBaMM supports >=3.8,<3.12
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",  # PyBaMM supports >=3.10, <3.15
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
@@ -84,7 +85,7 @@ packages = [
   "src/pybamm_cookie",
   "tests"
 ]
-python_version = "3.11"
+python_version = "3.13"
 strict = false
 warn_return_any = false
 show_error_codes = true

@@ -36,7 +36,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-14, macos-15-intel, windows-latest]
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     name:
       Template Generation/Project Tests (${{ matrix.os }} / Python ${{ matrix.python-version }})
     steps:
@@ -64,11 +64,11 @@ jobs:
         run: nox -s template-tests --verbose
 
       - name: Run coverage tests
-        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.13'
         run: nox -s coverage --verbose
 
       - name: Upload coverage report
-        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.13'
         uses: codecov/codecov-action@v5.5.3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -102,7 +102,7 @@ jobs:
   run_doctests:
     needs: style
     runs-on: ubuntu-latest
-    name: Doctests (ubuntu-latest / Python 3.12)
+    name: Doctests (ubuntu-latest / Python 3.13)
 
     steps:
       - name: Check out pybamm-cookie repository
@@ -114,6 +114,7 @@ jobs:
         uses: astral-sh/setup-uv@v7
         with:
           version: "latest"
+          python-version: "3.13"
           enable-cache: true
           cache-dependency-glob: "**/pyproject.toml"
 
@@ -128,7 +129,7 @@ jobs:
   run_generated_project_doctests:
     needs: [template_test]
     runs-on: ubuntu-latest
-    name: Generated Project Doctests (ubuntu-latest / Python 3.12)
+    name: Generated Project Doctests (ubuntu-latest / Python 3.13)
 
     steps:
       - name: Check out pybamm-cookie repository
@@ -140,7 +141,7 @@ jobs:
         uses: astral-sh/setup-uv@v7
         with:
           version: "latest"
-          python-version: "3.12"
+          python-version: "3.13"
           activate-environment: true
           enable-cache: true
           cache-dependency-glob: "**/pyproject.toml"
