@@ -1,8 +1,9 @@
-import copier
 import argparse
-from pathlib import Path
-from colorama import Fore
 import os
+from pathlib import Path
+
+import copier
+from colorama import Fore
 
 project_root = Path(__file__).resolve().parent.parent
 TEMPLATE = str(project_root)
