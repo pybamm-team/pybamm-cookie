@@ -8,6 +8,7 @@ from colorama import Fore
 project_root = Path(__file__).resolve().parent.parent
 TEMPLATE = str(project_root)
 
+
 def pybamm_cookie_cli():
     """
     Command Line Interface (CLI) for generating PyBaMM based projects using copier.
@@ -52,10 +53,10 @@ def pybamm_cookie_cli():
 
     except KeyboardInterrupt:
         print(Fore.RED + "Execution stopped by the user" + Fore.RESET)
-    except Exception as error:
+    except Exception as error:  # noqa: BLE001
         print(Fore.RED + "Error caused by an exception: " + Fore.RESET, error)
         print(Fore.CYAN + "If you are unsure what the error is, feel free to open an issue at" + Fore.YELLOW +" - https://github.com/pybamm-team/pybamm-cookie/issues" + Fore.RESET)
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     pybamm_cookie_cli()
